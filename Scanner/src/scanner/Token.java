@@ -14,7 +14,7 @@ public class Token {
     private TokenType tokenType;
     private Object tokenData;
 
-    public Token (type) {
+    public Token (TokenType type) {
         this (type, null);
     }
 
@@ -24,5 +24,20 @@ public class Token {
     }
 
     // some access methods
+    TokenType getTokenType() {
+        return tokenType;
+    }
+    
+    Object getTokenData() {
+        return tokenData;
+    }
+    
+    void setTokenType(TokenType type) {
+        tokenType = type;
+    }
+    
+    void setTokenData(Object data) {
+        tokenData = data;
+    }
 }
 
