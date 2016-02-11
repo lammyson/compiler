@@ -1,1 +1,6 @@
-!\Scanner\src
+Scanner\build\built-jar.properties
+Scanner\nbproject
+Scanner\build.xml
+Scanner\manifest.mf
+
+*.class
