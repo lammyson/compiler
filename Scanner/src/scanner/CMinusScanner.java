@@ -23,7 +23,7 @@ public class CMinusScanner implements Scanner{
     
     public Token getNextToken() {
         Token returnToken = nextToken;
-        if (nextToken.getType() != Token.TokenType.EOF_TOKEN) {
+        if (nextToken.getTokenType() != Token.TokenType.EOF_TOKEN) {
             nextToken = scanToken();
         }
         return returnToken;
@@ -32,13 +32,16 @@ public class CMinusScanner implements Scanner{
     public Token viewNextToken() {
         return nextToken;
     }
+    
+    public Token scanToken() {
+        
+        return null;
+    }
+               
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
-    
-    
 }
