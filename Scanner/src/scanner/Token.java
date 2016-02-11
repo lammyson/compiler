@@ -1,11 +1,12 @@
 package scanner;
 
 /**
- * 
- * 
+ * This class will be used by the CMinusScanner class to help in scanning
+ * for the tokens in a C Minus source code file
  */
 public class Token {
     
+    //TokenType enum to differentiate between different tokens while scanning
     public enum TokenType {
         ELSE_TOKEN,
         IF_TOKEN,
@@ -39,9 +40,18 @@ public class Token {
         DIGIT_TOKEN
     }
 
+    //Class variables
+    /**
+     * Used to store the type of the token
+     */
     private TokenType tokenType;
+    
+    /**
+     * Used to store the actual data of the token, can be any type
+     */
     private Object tokenData;
 
+    //Constructors
     public Token (TokenType type) {
         this (type, null);
     }
