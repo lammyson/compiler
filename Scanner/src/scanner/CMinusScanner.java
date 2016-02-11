@@ -6,12 +6,27 @@
 package scanner;
 
 import java.io.BufferedReader;
+import scanner.Token.TokenType;
 
 /**
  *
  * @author Ryan
  */
 public class CMinusScanner implements Scanner{
+    
+    /**
+     * Enum used to determine what state you are in
+     */
+    public enum StateType {
+        START,
+        INNUM,
+        INID,
+        INASSIGN,
+        INCOMMENT,
+        INLESSTHAN,
+        INGREATERTHAN,
+        DONE,
+    }
     
     private BufferedReader inFile;
     private Token nextToken;
@@ -34,6 +49,10 @@ public class CMinusScanner implements Scanner{
     }
     
     public Token scanToken() {
+        int tokenStringIndex = 0;
+        TokenType currentToken = null;
+        StateType state = StateType.START;
+        int save;
         
         return null;
     }
