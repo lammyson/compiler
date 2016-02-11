@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package scanner;
 
 /**
- *
- * @author Ryan
+ * 
+ * 
  */
 public class Token {
     
@@ -56,7 +51,7 @@ public class Token {
         tokenData = data;
     }
 
-    // some access methods
+    //Getters
     TokenType getTokenType() {
         return tokenType;
     }
@@ -65,6 +60,7 @@ public class Token {
         return tokenData;
     }
     
+    //Setters
     void setTokenType(TokenType type) {
         tokenType = type;
     }
