@@ -82,7 +82,7 @@ public class CMinusScanner implements Scanner{
                         } else {
                             state = StateType.DONE;
                             switch (c) {
-                                case EOF:
+                                case 0x3:   //Supposedly the eof character
                                     save = false;
                                     currentToken = Token.TokenType.EOF_TOKEN;
                                     break;
