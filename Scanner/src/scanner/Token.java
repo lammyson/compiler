@@ -26,6 +26,7 @@ public class Token {
         NOT_EQ_TOKEN,
         ASSIGN_TOKEN,
         SEMI_TOKEN,
+        COMMA_TOKEN,
         LPAREN_TOKEN,
         RPAREN_TOKEN,
         LSBRACK_TOKEN,
@@ -38,7 +39,8 @@ public class Token {
         NUM_TOKEN,
         LETTER_TOKEN,
         DIGIT_TOKEN,
-        EOF_TOKEN
+        EOF_TOKEN,
+        ERROR_TOKEN
     }
 
     //Class variables
