@@ -58,6 +58,7 @@ public class CMinusScanner implements Scanner{
         StateType state = StateType.START;
         boolean save;
         StringBuffer string = null;
+        Token token = null;
         
         while (state != StateType.DONE) {
             try {
@@ -208,6 +209,11 @@ public class CMinusScanner implements Scanner{
                 if (state == StateType.DONE) {
                     if (currentToken == Token.TokenType.ID_TOKEN) {
                         //Compare string to reserved tokens
+                        token = new Token(currentToken, (Object) string.toString());
+                        
+                    } else if (currentToken == Token.TokenType.DIGIT_TOKEN) {
+                        Integer numTokenData = Integer.valueOf(string.toString());
+                        token = new Token(currentToken, (Object) numTokenData);
                     }
                 }
             } catch (IOException e) {
@@ -216,7 +222,7 @@ public class CMinusScanner implements Scanner{
 
         }
 
-        return new Token(currentToken, (Object) string);
+        return token;
     }
                
     /**
