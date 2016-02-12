@@ -1,4 +1,4 @@
-/* This is the second test file for the C Minus Scanner */
+/* This is the second test file that will test this comment */
 
 int main(void) {
 
