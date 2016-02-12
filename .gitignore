@@ -8,3 +8,4 @@ hs_err_pid*
 
 Scanner/build/built-jar.properties
 *.class
+*.properties
