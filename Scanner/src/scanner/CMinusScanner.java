@@ -192,11 +192,23 @@ public class CMinusScanner implements Scanner{
                         break;
                     case INNUM:
                         if (!Character.isDigit(c)) {
+                            if (Character.isAlphabetic(c)) {
+                                throw new LexError("Letter found in INNUM");
+                            }
                             state = StateType.DONE;
                             currentToken = Token.TokenType.NUM_TOKEN;
                             inFile.reset();
                         }
                         break;
+                    case INID:
+                        if (!Character.isAlphabetic(c)) {
+                            if (Character.isDigit(c)) {
+                                throw new LexError("Num found in INID");
+                            }
+                            state = StateType.DONE;
+                            currentToken = Token.TokenType.ID_TOKEN;
+                            inFile.reset();
+                        }
                     case DONE:
                         break;
                     default:
@@ -211,6 +223,19 @@ public class CMinusScanner implements Scanner{
                 if (state == StateType.DONE) {
                     if (currentToken == Token.TokenType.ID_TOKEN) {
                         //Compare string to reserved tokens
+                        if (string != null && string.equals("else")) {
+                            currentToken = Token.TokenType.ELSE_TOKEN;
+                        } else if (string != null && string.equals("if")) {
+                            currentToken = Token.TokenType.IF_TOKEN;
+                        } else if (string != null && string.equals("int")) {
+                            currentToken = Token.TokenType.INT_TOKEN;
+                        } else if (string != null && string.equals("return")) {
+                            currentToken = Token.TokenType.RET_TOKEN;
+                        } else if (string != null && string.equals("void")) {
+                            currentToken = Token.TokenType.VOID_TOKEN;
+                        } else if (string != null && string.equals("while")) {
+                            currentToken = Token.TokenType.WHILE_TOKEN;
+                        }
                         token = new Token(currentToken, (Object) string.toString());
                         
                     } else if (currentToken == Token.TokenType.NUM_TOKEN) {
