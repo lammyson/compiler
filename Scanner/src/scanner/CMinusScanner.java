@@ -28,6 +28,7 @@ public class CMinusScanner implements Scanner{
         INENDCOM,
         INLESSTHAN,
         INGREATERTHAN,
+        INNOTEQUAL,
         DONE,
     }
     
@@ -79,6 +80,8 @@ public class CMinusScanner implements Scanner{
                             save = false;
                         } else if (c == '/') {
                             state = StateType.INDIVCOM;
+                        } else if (c == '!') {
+                            state = StateType.INNOTEQUAL;
                         } else {
                             state = StateType.DONE;
                             switch (c) {
@@ -118,7 +121,7 @@ public class CMinusScanner implements Scanner{
                                     break;
                             }
                         }
-                    break;
+                        break;
                     case INDIVCOM:
                         if (c == '*') {
                             state = StateType.INCOMMENT;
@@ -174,14 +177,20 @@ public class CMinusScanner implements Scanner{
                             state = StateType.DONE;
                             inFile.reset();
                         }
+                        break;
+                    case INNOTEQUAL:
+                        if (c == '=') {
+                            state = StateType.DONE;
+                            currentToken = Token.TokenType.NOT_EQ_TOKEN;
+                        }
+                        break;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
-            
+
         }
-        
+
         return null;
     }
                
