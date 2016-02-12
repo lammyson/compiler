@@ -239,17 +239,17 @@ public class CMinusScanner implements Scanner{
                 if (state == StateType.DONE) {
                     if (currentToken == Token.TokenType.ID_TOKEN) {
                         //Compare string to reserved tokens
-                        if (string != null && string.equals("else")) {
+                        if (string != null && string.toString().equals("else")) {
                             currentToken = Token.TokenType.ELSE_TOKEN;
-                        } else if (string != null && string.equals("if")) {
+                        } else if (string != null && string.toString().equals("if")) {
                             currentToken = Token.TokenType.IF_TOKEN;
-                        } else if (string != null && string.equals("int")) {
+                        } else if (string != null && string.toString().equals("int")) {
                             currentToken = Token.TokenType.INT_TOKEN;
-                        } else if (string != null && string.equals("return")) {
+                        } else if (string != null && string.toString().equals("return")) {
                             currentToken = Token.TokenType.RET_TOKEN;
-                        } else if (string != null && string.equals("void")) {
+                        } else if (string != null && string.toString().equals("void")) {
                             currentToken = Token.TokenType.VOID_TOKEN;
-                        } else if (string != null && string.equals("while")) {
+                        } else if (string != null && string.toString().equals("while")) {
                             currentToken = Token.TokenType.WHILE_TOKEN;
                         }
                         token = new Token(currentToken, (Object) string.toString());
