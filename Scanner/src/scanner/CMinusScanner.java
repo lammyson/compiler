@@ -147,6 +147,7 @@ public class CMinusScanner implements Scanner{
                     case INENDCOM:
                         if (c == '/') {
                             state = StateType.DONE;
+                            currentToken = Token.TokenType.COMMENT_TOKEN;
                         } else if (c == '*') {
                             state = StateType.INENDCOM;
                         } else {
