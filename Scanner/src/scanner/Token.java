@@ -52,7 +52,9 @@ public class Token {
      */
     private Object tokenData;
 
-    //Constructors
+    /**
+     * Constructors
+     */
     public Token (TokenType type) {
         this (type, null);
     }
@@ -62,7 +64,9 @@ public class Token {
         tokenData = data;
     }
 
-    //Getters
+    /**
+     * Accessors 
+     */
     TokenType getTokenType() {
         return tokenType;
     }
@@ -71,7 +75,9 @@ public class Token {
         return tokenData;
     }
     
-    //Setters
+    /**
+     * Mutators
+     */
     void setTokenType(TokenType type) {
         tokenType = type;
     }
