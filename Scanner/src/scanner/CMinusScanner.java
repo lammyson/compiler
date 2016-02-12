@@ -90,7 +90,7 @@ public class CMinusScanner implements Scanner{
                     inFile.mark(100);
                 }
                 char c = (char)inFile.read();
-                save = true;
+                save = false;
                 switch (state) {
                     case START:
                         if (Character.isDigit(c)) {
@@ -222,6 +222,8 @@ public class CMinusScanner implements Scanner{
                             state = StateType.DONE;
                             currentToken = Token.TokenType.NUM_TOKEN;
                             inFile.reset();
+                        } else {
+                            save = true;
                         }
                         break;
                     case INID:
@@ -232,6 +234,8 @@ public class CMinusScanner implements Scanner{
                             state = StateType.DONE;
                             currentToken = Token.TokenType.ID_TOKEN;
                             inFile.reset();
+                        } else {
+                            save = true;
                         }
                     case DONE:
                         break;
