@@ -187,6 +187,12 @@ public class CMinusScanner implements Scanner{
                             currentToken = Token.TokenType.NOT_EQ_TOKEN;
                         }
                         break;
+                    case DONE:
+                        break;
+                    default:
+                        System.out.println("Scanner error. Was in state" + state);
+                        state = StateType.DONE;
+                        currentToken = Token.TokenType.ERROR_TOKEN;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
