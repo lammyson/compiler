@@ -1,0 +1,10 @@
+/* This test file will test keywords */
+
+void main() {
+    int;
+    if;
+    else;
+    void;
+    while;
+    return;
+}
