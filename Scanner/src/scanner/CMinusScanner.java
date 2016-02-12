@@ -265,7 +265,8 @@ public class CMinusScanner implements Scanner{
             }
 
         }
-
+        
+        nextToken = token;
         return token;
     }
                
