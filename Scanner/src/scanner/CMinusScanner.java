@@ -41,6 +41,7 @@ public class CMinusScanner implements Scanner{
     
     /**
      * Constructor 
+     * @param file is the file that will be scanned
      */
     public CMinusScanner(BufferedReader file) {
         inFile = file;
@@ -49,6 +50,7 @@ public class CMinusScanner implements Scanner{
     
     /**
      * This method gets the next token in the input file
+     * @return nextToken in the input file
      */
     public Token getNextToken() {
         Token returnToken = nextToken;
@@ -60,14 +62,16 @@ public class CMinusScanner implements Scanner{
     
     /**
      * This method views the next token in the input file
+     * @return nextToken without consuming input
      */
     public Token viewNextToken() {
         return nextToken;
     }
     
     /**
-     * This method will scan until the next token is found or a lexical error
-     * is found
+     * This method will scan characters until the next token is found or a 
+     * lexical error is found
+     * @return token which is the current token found
      */
     public Token scanToken() {
         TokenType currentToken = null;
