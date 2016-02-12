@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package scanner;
 
 import java.io.BufferedReader;
@@ -10,7 +5,9 @@ import java.io.IOException;
 import scanner.Token.TokenType;
 
 /**
- *
+ * This class implements the Scanner interface. It reads in source code from
+ * a C Minus source code file and scans it to make sure there are no lexical
+ * errors
  * @author Ryan
  */
 public class CMinusScanner implements Scanner{
@@ -29,17 +26,30 @@ public class CMinusScanner implements Scanner{
         INLESSTHAN,
         INGREATERTHAN,
         INNOTEQUAL,
-        DONE,
+        DONE
     }
     
+    /**
+     * Used to read in characters from a source code file
+     */
     private BufferedReader inFile;
+    
+    /**
+     * Used to store the next token in the source code file
+     */
     private Token nextToken;
     
+    /**
+     * Constructor 
+     */
     public CMinusScanner(BufferedReader file) {
         inFile = file;
         nextToken = scanToken();
     }
     
+    /**
+     * This method gets the next token in the input file
+     */
     public Token getNextToken() {
         Token returnToken = nextToken;
         if (nextToken.getTokenType() != Token.TokenType.EOF_TOKEN) {
@@ -48,10 +58,17 @@ public class CMinusScanner implements Scanner{
         return returnToken;
     }
     
+    /**
+     * This method views the next token in the input file
+     */
     public Token viewNextToken() {
         return nextToken;
     }
     
+    /**
+     * This method will scan until the next token is found or a lexical error
+     * is found
+     */
     public Token scanToken() {
         TokenType currentToken = null;
         StateType state = StateType.START;
