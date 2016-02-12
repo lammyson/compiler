@@ -24,6 +24,8 @@ public class CMinusScanner implements Scanner{
         INID,
         INASSIGN,
         INCOMMENT,
+        INDIVCOM,
+        INENDCOM,
         INLESSTHAN,
         INGREATERTHAN,
         DONE,
@@ -56,6 +58,9 @@ public class CMinusScanner implements Scanner{
         boolean save;
         while (state != StateType.DONE) {
             try {
+                if (inFile.markSupported()) {
+                    inFile.mark(Integer.MAX_VALUE);
+                }
                 char c = (char)inFile.read();
                 save = true;
                 switch (state) {
@@ -73,7 +78,7 @@ public class CMinusScanner implements Scanner{
                         } else if ((c == ' ') || (c == '\t') || (c == '\n')) {
                             save = false;
                         } else if (c == '/') {
-                            state = StateType.INCOMMENT;
+                            state = StateType.INDIVCOM;
                         } else {
                             state = StateType.DONE;
                             switch (c) {
@@ -114,11 +119,61 @@ public class CMinusScanner implements Scanner{
                             }
                         }
                     break;
+                    case INDIVCOM:
+                        if (c == '*') {
+                            state = StateType.INCOMMENT;
+                        } else {
+                            state = StateType.DONE;
+                            inFile.reset();
+                            currentToken = Token.TokenType.DIV_TOKEN;
+                        }
+                        break;
                     case INCOMMENT:
                         if (c == '*') {
-                            
+                            state = StateType.INENDCOM;
                         }
-                        
+                        break;
+                    case INENDCOM:
+                        if (c == '/') {
+                            state = StateType.DONE;
+                        } else if (c == '*') {
+                            state = StateType.INENDCOM;
+                        } else {
+                            state = StateType.INCOMMENT;
+                        }
+                        break;
+                    case INASSIGN:
+                        state = StateType.DONE;
+                        if (c == '=') {
+                            currentToken = Token.TokenType.EQUAL_TOKEN;
+                        } else {
+                            inFile.reset();
+                            currentToken = Token.TokenType.ASSIGN_TOKEN;
+                        }
+                        break;
+                    case INLESSTHAN:
+                        state = StateType.DONE;
+                        if (c == '=') {
+                            currentToken = Token.TokenType.LESS_EQ_TOKEN;
+                        } else {
+                            inFile.reset();
+                            currentToken = Token.TokenType.LESS_TOKEN;
+                        }
+                        break;
+                    case INGREATERTHAN:
+                        state = StateType.DONE;
+                        if (c == '=') {
+                            currentToken = Token.TokenType.GREAT_EQ_TOKEN;
+                        } else {
+                            inFile.reset();
+                            currentToken = Token.TokenType.GREAT_TOKEN;
+                        }
+                        break;
+                    case INNUM:
+                        if (!Character.isDigit(c)) {
+                            state = StateType.DONE;
+                            inFile.reset();
+                        }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
