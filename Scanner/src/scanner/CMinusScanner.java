@@ -201,13 +201,22 @@ public class CMinusScanner implements Scanner{
                         state = StateType.DONE;
                         throw new LexError("Scanner error");
                 }
+                
+                if (save) {
+                    string.append(c);
+                }
+                if (state == StateType.DONE) {
+                    if (currentToken == Token.TokenType.ID_TOKEN) {
+                        //Compare string to reserved tokens
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
         }
 
-        return null;
+        return new Token(currentToken, (Object) string);
     }
                
     /**
