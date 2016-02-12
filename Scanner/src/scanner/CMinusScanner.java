@@ -70,7 +70,6 @@ public class CMinusScanner implements Scanner{
      * is found
      */
     public Token scanToken() {
-        int tokenStringIndex = 0;
         TokenType currentToken = null;
         StateType state = StateType.START;
         boolean save;
