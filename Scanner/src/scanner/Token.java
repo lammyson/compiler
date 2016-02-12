@@ -54,6 +54,7 @@ public class Token {
 
     /**
      * Constructors
+     * @param type contains a token type defined in the enum
      */
     public Token (TokenType type) {
         this (type, null);
