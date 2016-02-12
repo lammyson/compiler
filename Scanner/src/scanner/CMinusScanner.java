@@ -57,6 +57,8 @@ public class CMinusScanner implements Scanner{
         TokenType currentToken = null;
         StateType state = StateType.START;
         boolean save;
+        StringBuffer string = null;
+        
         while (state != StateType.DONE) {
             try {
                 if (inFile.markSupported()) {
