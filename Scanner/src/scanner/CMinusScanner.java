@@ -1,6 +1,10 @@
 package scanner;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import scanner.Token.TokenType;
 
@@ -83,7 +87,7 @@ public class CMinusScanner implements Scanner{
         while (state != StateType.DONE) {
             try {
                 if (inFile.markSupported()) {
-                    inFile.mark(Integer.MAX_VALUE);
+                    inFile.mark(100);
                 }
                 char c = (char)inFile.read();
                 save = true;
@@ -277,6 +281,30 @@ public class CMinusScanner implements Scanner{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            File filename = new File(args[0]);
+            FileReader fReader = new FileReader(filename);
+            BufferedReader reader = new BufferedReader(fReader);
+            CMinusScanner cScan = new CMinusScanner(reader);
+            
+            FileWriter writer = new FileWriter(args[1], true);
+            Token currentToken = null;
+            
+            while(cScan.viewNextToken().getTokenType() != Token.TokenType.EOF_TOKEN) {
+                currentToken = cScan.getNextToken();
+                writer.write(currentToken.getTokenType().toString());
+                if (currentToken.getTokenType() == Token.TokenType.NUM_TOKEN ||
+                        currentToken.getTokenType() == Token.TokenType.ID_TOKEN) {
+                    writer.write("(" + currentToken.getTokenData().toString() + ")");
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File not found");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+            System.out.println("Write to file failed");
+        }
+        
     }
 }
