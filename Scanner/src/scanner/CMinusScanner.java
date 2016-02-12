@@ -192,6 +192,7 @@ public class CMinusScanner implements Scanner{
                     case INNUM:
                         if (!Character.isDigit(c)) {
                             state = StateType.DONE;
+                            currentToken = Token.TokenType.NUM_TOKEN;
                             inFile.reset();
                         }
                         break;
@@ -211,7 +212,7 @@ public class CMinusScanner implements Scanner{
                         //Compare string to reserved tokens
                         token = new Token(currentToken, (Object) string.toString());
                         
-                    } else if (currentToken == Token.TokenType.DIGIT_TOKEN) {
+                    } else if (currentToken == Token.TokenType.NUM_TOKEN) {
                         Integer numTokenData = Integer.valueOf(string.toString());
                         token = new Token(currentToken, (Object) numTokenData);
                     }
