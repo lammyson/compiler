@@ -6,7 +6,9 @@ package scanner;
  */
 public class Token {
     
-    //TokenType enum to differentiate between different tokens while scanning
+    /**
+     * TokenType enum to differentiate between different tokens while scanning
+     */
     public enum TokenType {
         ELSE_TOKEN,
         IF_TOKEN,
@@ -33,15 +35,10 @@ public class Token {
         RSBRACK_TOKEN,
         LCBRACK_TOKEN,
         RCBRACK_TOKEN,
-        BEGIN_COMMENT_TOKEN,
-        END_COMMENT_TOKEN,
         COMMENT_TOKEN,
         ID_TOKEN,
         NUM_TOKEN,
-        LETTER_TOKEN,
-        DIGIT_TOKEN,
-        EOF_TOKEN,
-        ERROR_TOKEN
+        EOF_TOKEN
     }
 
     //Class variables
@@ -55,7 +52,9 @@ public class Token {
      */
     private Object tokenData;
 
-    //Constructors
+    /**
+     * Constructors
+     */
     public Token (TokenType type) {
         this (type, null);
     }
@@ -65,7 +64,9 @@ public class Token {
         tokenData = data;
     }
 
-    //Getters
+    /**
+     * Accessors 
+     */
     TokenType getTokenType() {
         return tokenType;
     }
@@ -74,7 +75,9 @@ public class Token {
         return tokenData;
     }
     
-    //Setters
+    /**
+     * Mutators
+     */
     void setTokenType(TokenType type) {
         tokenType = type;
     }
