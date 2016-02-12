@@ -35,6 +35,7 @@ public class Token {
         RCBRACK_TOKEN,
         BEGIN_COMMENT_TOKEN,
         END_COMMENT_TOKEN,
+        COMMENT_TOKEN,
         ID_TOKEN,
         NUM_TOKEN,
         LETTER_TOKEN,
