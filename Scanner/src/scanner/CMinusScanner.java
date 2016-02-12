@@ -124,6 +124,8 @@ public class CMinusScanner implements Scanner{
                                 case ',':
                                     currentToken = Token.TokenType.COMMA_TOKEN;
                                     break;
+                                default:
+                                    throw new LexError("Invalid symbol found");
                             }
                         }
                         break;
@@ -177,16 +179,19 @@ public class CMinusScanner implements Scanner{
                             currentToken = Token.TokenType.GREAT_TOKEN;
                         }
                         break;
+                    case INNOTEQUAL:
+                        state = StateType.DONE;
+                        if (c == '=') {
+                            currentToken = Token.TokenType.NOT_EQ_TOKEN;
+                        } else {
+                            inFile.reset();
+                            throw new LexError("! found without =");
+                        }
+                        break;
                     case INNUM:
                         if (!Character.isDigit(c)) {
                             state = StateType.DONE;
                             inFile.reset();
-                        }
-                        break;
-                    case INNOTEQUAL:
-                        if (c == '=') {
-                            state = StateType.DONE;
-                            currentToken = Token.TokenType.NOT_EQ_TOKEN;
                         }
                         break;
                     case DONE:
