@@ -81,41 +81,51 @@ public class CMinusScanner implements Scanner{
         TokenType currentToken = null;
         StateType state = StateType.START;
         boolean save;
-        StringBuffer string = null;
+        StringBuffer string = new StringBuffer();
         Token token = null;
-        
+        int readInt;
+        // While not done reading in token, continue with process
         while (state != StateType.DONE) {
             try {
+                // Mark the file to "unread" a character if needed
                 if (inFile.markSupported()) {
                     inFile.mark(100);
                 }
-                char c = (char)inFile.read();
+                readInt = inFile.read();
+                char c = (char)readInt;
+                // -1 signifies end of file
+                if (readInt == -1) {
+                    currentToken = Token.TokenType.EOF_TOKEN;
+                    state = StateType.DONE;
+                }
                 save = false;
                 switch (state) {
                     case START:
                         if (Character.isDigit(c)) {
                             state = StateType.INNUM;
+                            save = true;
                         } else if (Character.isAlphabetic((int)c)) {
                             state = StateType.INID;
+                            save = true;
                         } else if (c == '=') {
                             state = StateType.INASSIGN;
                         } else if (c == '<') {
                             state = StateType.INLESSTHAN;
                         } else if (c == '>') {
                             state = StateType.INGREATERTHAN;
-                        } else if ((c == ' ') || (c == '\t') || (c == '\n')) {
+                        // whitespace chars
+                        } else if ((c == ' ') || (c == '\t') || 
+                                   (c == '\n') || (c == '\r')) {
                             save = false;
+                        // '/' could signify comment or division
                         } else if (c == '/') {
                             state = StateType.INDIVCOM;
                         } else if (c == '!') {
                             state = StateType.INNOTEQUAL;
+                        // single character tokens
                         } else {
                             state = StateType.DONE;
                             switch (c) {
-                                case 0x3:   //Supposedly the eof character
-                                    save = false;
-                                    currentToken = Token.TokenType.EOF_TOKEN;
-                                    break;
                                 case '+':
                                     currentToken = Token.TokenType.ADD_TOKEN;
                                     break;
@@ -210,12 +220,14 @@ public class CMinusScanner implements Scanner{
                         if (c == '=') {
                             currentToken = Token.TokenType.NOT_EQ_TOKEN;
                         } else {
+                            // Throw error if ! found with no = following
                             inFile.reset();
                             throw new LexError("! found without =");
                         }
                         break;
                     case INNUM:
                         if (!Character.isDigit(c)) {
+                            // Whitespace needed between NUMs and IDs
                             if (Character.isAlphabetic(c)) {
                                 throw new LexError("Letter found in INNUM");
                             }
@@ -228,6 +240,7 @@ public class CMinusScanner implements Scanner{
                         break;
                     case INID:
                         if (!Character.isAlphabetic(c)) {
+                            // Whitespace needed between IDs and NUMs
                             if (Character.isDigit(c)) {
                                 throw new LexError("Num found in INID");
                             }
@@ -237,14 +250,16 @@ public class CMinusScanner implements Scanner{
                         } else {
                             save = true;
                         }
+                        break;
                     case DONE:
                         break;
+                    // Should never reach this default
                     default:
                         System.out.println("Scanner error. Was in state" + state);
                         state = StateType.DONE;
                         throw new LexError("Scanner error");
                 }
-                
+                // If num or id, append char to string for value storage
                 if (save) {
                     string.append(c);
                 }
@@ -264,11 +279,16 @@ public class CMinusScanner implements Scanner{
                         } else if (string != null && string.toString().equals("while")) {
                             currentToken = Token.TokenType.WHILE_TOKEN;
                         }
+                        // Create ID token with string as data
                         token = new Token(currentToken, (Object) string.toString());
                         
                     } else if (currentToken == Token.TokenType.NUM_TOKEN) {
+                        // Create NUM token with string cast to int as data
                         Integer numTokenData = Integer.valueOf(string.toString());
                         token = new Token(currentToken, (Object) numTokenData);
+                    } else {
+                        // Create token with no data
+                        token = new Token(currentToken);
                     }
                 }
             } catch (IOException e) {
@@ -276,8 +296,6 @@ public class CMinusScanner implements Scanner{
             }
 
         }
-        
-        nextToken = token;
         return token;
     }
                
@@ -286,22 +304,31 @@ public class CMinusScanner implements Scanner{
      */
     public static void main(String[] args) {
         try {
+            // Initialize input file and scanner
             File filename = new File(args[0]);
             FileReader fReader = new FileReader(filename);
             BufferedReader reader = new BufferedReader(fReader);
             CMinusScanner cScan = new CMinusScanner(reader);
             
+            // Initialize output file
             FileWriter writer = new FileWriter(args[1], true);
-            Token currentToken = null;
+            Token currentToken;
+            String output = "";
             
+            // Continue through input file until eof token is hit
             while(cScan.viewNextToken().getTokenType() != Token.TokenType.EOF_TOKEN) {
-                currentToken = cScan.getNextToken();
-                writer.write(currentToken.getTokenType().toString());
+                currentToken = cScan.getNextToken(); 
+                // output token type
+                output += currentToken.getTokenType().toString();
+                // if ID or NUM, output data with token type in form token(data)
                 if (currentToken.getTokenType() == Token.TokenType.NUM_TOKEN ||
                         currentToken.getTokenType() == Token.TokenType.ID_TOKEN) {
-                    writer.write("(" + currentToken.getTokenData().toString() + ")");
+                    output += ("(" + currentToken.getTokenData().toString() + ")");
                 }
+                output += "\n";
             }
+            writer.write(output);
+            writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             System.out.println("File not found");
