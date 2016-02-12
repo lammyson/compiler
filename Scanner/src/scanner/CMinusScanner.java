@@ -194,7 +194,7 @@ public class CMinusScanner implements Scanner{
                     default:
                         System.out.println("Scanner error. Was in state" + state);
                         state = StateType.DONE;
-                        currentToken = Token.TokenType.ERROR_TOKEN;
+                        throw new LexError("Scanner error");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
