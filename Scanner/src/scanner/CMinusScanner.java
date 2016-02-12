@@ -119,6 +119,9 @@ public class CMinusScanner implements Scanner{
                                 case ';':
                                     currentToken = Token.TokenType.SEMI_TOKEN;
                                     break;
+                                case ',':
+                                    currentToken = Token.TokenType.COMMA_TOKEN;
+                                    break;
                             }
                         }
                         break;
