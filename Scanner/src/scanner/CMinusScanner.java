@@ -180,8 +180,7 @@ public class CMinusScanner implements Scanner{
                         break;
                     case INENDCOM:
                         if (c == '/') {
-                            state = StateType.DONE;
-                            currentToken = Token.TokenType.COMMENT_TOKEN;
+                            state = StateType.START;
                         } else if (c == '*') {
                             state = StateType.INENDCOM;
                         } else {
