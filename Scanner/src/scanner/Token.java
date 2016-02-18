@@ -68,22 +68,22 @@ public class Token {
     /**
      * Accessors 
      */
-    TokenType getTokenType() {
+    public TokenType getTokenType() {
         return tokenType;
     }
     
-    Object getTokenData() {
+    public Object getTokenData() {
         return tokenData;
     }
     
     /**
      * Mutators
      */
-    void setTokenType(TokenType type) {
+    public void setTokenType(TokenType type) {
         tokenType = type;
     }
     
-    void setTokenData(Object data) {
+    public void setTokenData(Object data) {
         tokenData = data;
     }
 }
