@@ -35,7 +35,6 @@ public class Token {
         RSBRACK_TOKEN,
         LCBRACK_TOKEN,
         RCBRACK_TOKEN,
-        COMMENT_TOKEN,
         ID_TOKEN,
         NUM_TOKEN,
         EOF_TOKEN
