@@ -2,12 +2,11 @@
 
 himom3
 
-2398237w
+45hello
 
-@
+else23
 
-/* ---OUTPUT--- */
-All three of these (run separately) threw LexErrors with respective messages
+!nothing
 
-
-
+/*-----OUTPUT------*/
+All of these (tested separately) threw LexErrors with appropriate messages.

@@ -1,30 +1,35 @@
 /* This test file will test keywords and operators */
 
 void main() {
-    int
-    if
-    else
-    void
-    while
-    return
-    298424
+    int;
+    if;
+    else;
+    void;
+    while;
+    return;
 
 +-*/<<=>>===!==;,()[]{}/***/
 }
 
-/* ---OUTPUT--- */
+/*-----OUTPUT-------*/
+COMMENT_TOKEN
 VOID_TOKEN
 ID_TOKEN(main)
 LPAREN_TOKEN
 RPAREN_TOKEN
 LCBRACK_TOKEN
 INT_TOKEN
+SEMI_TOKEN
 IF_TOKEN
+SEMI_TOKEN
 ELSE_TOKEN
+SEMI_TOKEN
 VOID_TOKEN
+SEMI_TOKEN
 WHILE_TOKEN
+SEMI_TOKEN
 RET_TOKEN
-NUM_TOKEN(298424)
+SEMI_TOKEN
 ADD_TOKEN
 SUB_TOKEN
 MUL_TOKEN
@@ -44,4 +49,5 @@ LSBRACK_TOKEN
 RSBRACK_TOKEN
 LCBRACK_TOKEN
 RCBRACK_TOKEN
+COMMENT_TOKEN
 RCBRACK_TOKEN

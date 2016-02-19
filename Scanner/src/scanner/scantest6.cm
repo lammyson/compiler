@@ -26,7 +26,8 @@ int average(int nums[5]) {
     return avg;
 }
 
-/* ---OUTPUT--- */
+/*-----OUTPUT------*/
+COMMENT_TOKEN
 INT_TOKEN
 ID_TOKEN(average)
 LPAREN_TOKEN
@@ -159,4 +160,3 @@ RET_TOKEN
 ID_TOKEN(avg)
 SEMI_TOKEN
 RCBRACK_TOKEN
-
