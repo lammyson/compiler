@@ -9,7 +9,14 @@ import java.util.ArrayList;
 public class Program {
     private ArrayList<Declaration> program;
     
+    public Program(ArrayList<Declaration> declList) {
+        program = declList;
+    }
+    
     public Program parseProgram() {
-        return new Program();
+        ArrayList<Declaration> declList;
+        
+        
+        return new Program(declList);
     }
 }
