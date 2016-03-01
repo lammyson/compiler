@@ -14,7 +14,7 @@ public class Program {
     }
     
     public Program parseProgram() {
-        ArrayList<Declaration> declList;
+        ArrayList<Declaration> declList = new ArrayList();
         
         
         return new Program(declList);
