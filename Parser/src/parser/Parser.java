@@ -1,10 +1,12 @@
 package parser;
 
+import scanner.CMinusScanner;
 /**
  *
  * @author Ryan
  */
 public class Parser {
+    CMinusScanner scan;
 
     /**
      * @param args the command line arguments
