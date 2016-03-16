@@ -16,6 +16,11 @@ public class Program {
     public Program parseProgram() {
         ArrayList<Declaration> declList = new ArrayList();
         
+        declList.add(parseDeclaration());
+        
+        while() {
+            declList.add(parseDeclaration());
+        }
         
         return new Program(declList);
     }
