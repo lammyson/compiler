@@ -47,7 +47,7 @@ public class FunDeclaration extends Declaration {
     /**
      * This method will print the attributes of this class
      */
-    public void printMe() {
+    private void printMe() {
         
     }
 }
