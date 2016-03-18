@@ -2,6 +2,7 @@ package parser;
 
 import java.util.ArrayList;
 import scanner.CMinusScanner;
+import scanner.Token.TokenType;
 /**
  *
  * @author Ryan
@@ -20,11 +21,12 @@ public class Parser {
      */
     public Program parseProgram() {
         ArrayList<Declaration> declList = new ArrayList();
-        
-        declList.add(parseDeclaration());
-        
-        while() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        while (type == TokenType.INT_TOKEN || type == TokenType.VOID_TOKEN) {
             declList.add(parseDeclaration());
+        }
+        if (scan.viewNextToken().getTokenType() != TokenType.EOF_TOKEN) {
+            throw new ParseError("Error in parseProgram: expected EOF");
         }
         
         return new Program(declList);
