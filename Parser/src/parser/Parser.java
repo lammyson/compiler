@@ -79,6 +79,60 @@ public class Parser {
                 params, cstmt);
     }
     
+    private Declaration parseVarDeclaration() {
+        matchToken(TokenType.INT_TOKEN);
+        String id = matchIDToken();
+        if (scan.viewNextToken().getTokenType() == TokenType.LSBRACK_TOKEN) {
+            matchToken(TokenType.LSBRACK_TOKEN);
+            int num = matchNumToken();
+            matchToken(TokenType.RSBRACK_TOKEN);
+            matchToken(TokenType.SEMI_TOKEN);
+            return new VarDeclaration(new IdExpression(id), num);
+        } else {
+            matchToken(TokenType.SEMI_TOKEN);
+            return new VarDeclaration(new IdExpression(id), -1);
+        }
+    }
+    
+    private ArrayList<Param> parseParams() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.INT_TOKEN) {
+            return parseParamList();
+        } else if (type == TokenType.VOID_TOKEN) {
+            matchToken(TokenType.VOID_TOKEN);
+            return null;
+        }
+    }
+    
+    private ArrayList<Param> parseParamList() {
+        ArrayList<Param> plist = new ArrayList<Param>();
+        plist.add(parseParam());
+        while (scan.viewNextToken().getTokenType() == TokenType.COMMA_TOKEN) {
+            matchToken(TokenType.COMMA_TOKEN);
+            plist.add(parseParam());
+        }
+        return plist;
+    }
+    
+    private Param parseParam() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        matchToken(TokenType.INT_TOKEN);
+        String id = matchIDToken();
+        if (type == TokenType.LSBRACK_TOKEN) {
+            matchToken(TokenType.LSBRACK_TOKEN);
+            matchToken(TokenType.RSBRACK_TOKEN);
+            return new Param(new IdExpression(id), true);
+        } else if (type == TokenType.COMMA_TOKEN || 
+                   type == TokenType.RPAREN_TOKEN) {
+            return new Param(new IdExpression(id), false);
+        } else {
+            throw new ParseError("Error in parseParam: unexpected token" 
+                    + scan.viewNextToken().getTokenType());
+        }
+    }
+    
+    
+    
     private void matchToken(TokenType type) {
         if (scan.viewNextToken().getTokenType() == type) {
             
