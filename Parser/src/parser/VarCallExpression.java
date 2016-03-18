@@ -14,7 +14,7 @@ public class VarCallExpression extends Expression {
     private IdExpression          identifier;
     
     /**
-     * This variable holds an expression for an array var. Can be null.
+     * This variable holds an expression for an array var
      */
     private Expression            expression;
     
