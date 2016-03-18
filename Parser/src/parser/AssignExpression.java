@@ -1,7 +1,7 @@
 package parser;
 
 /**
- *
+ * This class defines 
  * @author Ryan
  */
 public class AssignExpression extends Expression {
