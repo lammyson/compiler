@@ -14,16 +14,16 @@ public class VarDeclaration extends Declaration {
     
     /**
      * This variable holds the size of the array
-     * It will be null if it is not of type array
+     * If -1, it is not of type array
      */
-    private NumExpression num;
+    private int num;
     
     /**
      * Constructor
      * @param id
      * @param n 
      */
-    public VarDeclaration(IdExpression id, NumExpression n) {
+    public VarDeclaration(IdExpression id, int n) {
         identifier = id;
         num        = n;
     }
