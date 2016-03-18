@@ -10,22 +10,22 @@ public class VarDeclaration extends Declaration {
     /**
      * This variable holds the name of the variable
      */
-    private IdExpression      identifier;
+    private IdExpression  identifier;
     
     /**
-     * This variable holds the array of the variable
+     * This variable holds the size of the array
      * It will be null if it is not of type array
      */
-    private VarCallExpression variable;
+    private NumExpression num;
     
     /**
      * Constructor
      * @param id
-     * @param var 
+     * @param n 
      */
-    public VarDeclaration(IdExpression id, VarCallExpression var) {
+    public VarDeclaration(IdExpression id, NumExpression n) {
         identifier = id;
-        variable   = var;
+        num        = n;
     }
     
     /**
