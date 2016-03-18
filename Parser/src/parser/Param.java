@@ -1,9 +1,37 @@
 package parser;
 
 /**
- *
+ * This class defines the params nonterminal in the C Minus language
+ * It will always be of type int
  * @author Ryan
  */
 public class Param {
     
+    /**
+     * This variable holds the id of the param
+     */
+    private IdExpression identifier;
+    
+    /**
+     * This variable tells if the param is of type array
+     * False if not array. true if array.
+     */
+    private boolean          arrayType;
+    
+    /**
+     * Constructor
+     * @param id
+     * @param array 
+     */
+    public Param(IdExpression id, boolean array) {
+        identifier = id;
+        arrayType  = array;
+    }
+    
+    /**
+     * This method will print the attributes of a param
+     */
+    private void printMe() {
+        
+    }
 }
