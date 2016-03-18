@@ -1,5 +1,6 @@
 package parser;
 
+import java.util.ArrayList;
 import scanner.CMinusScanner;
 /**
  *
@@ -7,6 +8,27 @@ import scanner.CMinusScanner;
  */
 public class Parser {
     CMinusScanner scan;
+    Program       p;
+    
+    public Parser(CMinusScanner s) {
+        scan = s;
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public Program parseProgram() {
+        ArrayList<Declaration> declList = new ArrayList();
+        
+        declList.add(parseDeclaration());
+        
+        while() {
+            declList.add(parseDeclaration());
+        }
+        
+        return new Program(declList);
+    }
 
     /**
      * @param args the command line arguments
