@@ -22,7 +22,7 @@ public class FunDeclaration extends Declaration {
     /**
      * This variable holds the parameters that the function needs
      */
-    private ArrayList<Param>  params;
+    private ArrayList<Param>  paramList;
     
     /**
      * This variable holds the function definition
@@ -36,11 +36,11 @@ public class FunDeclaration extends Declaration {
      * @param paramList
      * @param compound 
      */
-    public FunDeclaration(int ret, IdExpression id, ArrayList<Param> paramList,
+    public FunDeclaration(int ret, IdExpression id, ArrayList<Param> params,
                           CompoundStatement compound) {
         returnType        = ret;
         identifier        = id;
-        params            = paramList;
+        paramList         = params;
         compoundStatement = compound;
     }
     
