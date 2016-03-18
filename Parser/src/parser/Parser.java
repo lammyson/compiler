@@ -101,6 +101,9 @@ public class Parser {
         } else if (type == TokenType.VOID_TOKEN) {
             matchToken(TokenType.VOID_TOKEN);
             return null;
+        } else {
+            throw new ParseError("Error in parseParams: unexpected token" 
+                    + scan.viewNextToken().getTokenType());
         }
     }
     
