@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package parser;
 
 /**
- *
+ * This class implements a ParseError. It is thrown whenever an error is found
+ * in the parsing stage of the compiler.
  * @author Andrew
  */
 public class ParseError extends RuntimeException {
