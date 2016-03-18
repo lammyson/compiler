@@ -3,6 +3,7 @@ package parser;
 /**
  * This class defines the params nonterminal in the C Minus language
  * It will always be of type int
+ * Param is found in function declarations
  * @author Ryan
  */
 public class Param {
@@ -16,7 +17,7 @@ public class Param {
      * This variable tells if the param is of type array
      * False if not array. true if array.
      */
-    private boolean          arrayType;
+    private boolean      arrayType;
     
     /**
      * Constructor
