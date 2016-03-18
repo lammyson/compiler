@@ -4,20 +4,27 @@ import java.util.ArrayList;
 import scanner.CMinusScanner;
 import scanner.Token;
 import scanner.Token.TokenType;
+
 /**
- *
+ * This class will implement a C Minus Parser
  * @author Ryan
  */
 public class Parser {
+    /**
+     * This holds the C Minus Scanner
+     */
     CMinusScanner scan;
-    Program       p;
     
+    /**
+     * Constructor
+     * @param s 
+     */
     public Parser(CMinusScanner s) {
         scan = s;
     }
     
     /**
-     * 
+     * This method parses a program
      * @return 
      */
     private Program parseProgram() {
@@ -32,6 +39,10 @@ public class Parser {
         return new Program(declList);
     }
     
+    /**
+     * This method parses a declaration
+     * @return 
+     */
     private Declaration parseDeclaration() {
         Declaration decl;
         TokenType type = scan.viewNextToken().getTokenType();
@@ -50,6 +61,11 @@ public class Parser {
         return decl;
     }
     
+    /**
+     * This method parses a declaration prime
+     * @param id from parseDeclaration
+     * @return 
+     */
     public Declaration parseDeclaration2(String id) {
         TokenType type = scan.viewNextToken().getTokenType();
         if (type == TokenType.SEMI_TOKEN) {
@@ -69,6 +85,12 @@ public class Parser {
         }
     }
     
+    /**
+     * This method parses a fun-declaration prime
+     * @param returnType to determine if it's a fun or var declaration
+     * @param id for declaration name
+     * @return 
+     */
     private Declaration parseFunDeclaration2(int returnType, String id) {
         TokenType type = scan.viewNextToken().getTokenType();
         matchToken(TokenType.LPAREN_TOKEN);
@@ -79,6 +101,10 @@ public class Parser {
                 params, cstmt);
     }
     
+    /**
+     * This method parses a var-declaration
+     * @return 
+     */
     private Declaration parseVarDeclaration() {
         matchToken(TokenType.INT_TOKEN);
         String id = matchIDToken();
@@ -94,6 +120,10 @@ public class Parser {
         }
     }
     
+    /**
+     * This method parses a params
+     * @return 
+     */
     private ArrayList<Param> parseParams() {
         TokenType type = scan.viewNextToken().getTokenType();
         if (type == TokenType.INT_TOKEN) {
@@ -107,6 +137,10 @@ public class Parser {
         }
     }
     
+    /**
+     * This method parses a param-list
+     * @return 
+     */
     private ArrayList<Param> parseParamList() {
         ArrayList<Param> plist = new ArrayList<Param>();
         plist.add(parseParam());
@@ -117,6 +151,10 @@ public class Parser {
         return plist;
     }
     
+    /**
+     * This method parses a param
+     * @return 
+     */
     private Param parseParam() {
         TokenType type = scan.viewNextToken().getTokenType();
         matchToken(TokenType.INT_TOKEN);
@@ -136,9 +174,12 @@ public class Parser {
     
     
     
+    /**
+     * This is a helper method to help match tokens
+     * @param type 
+     */
     private void matchToken(TokenType type) {
         if (scan.viewNextToken().getTokenType() == type) {
-            
             scan.getNextToken();
         } else {
             throw new ParseError("matchToken error: expected " + type + 
@@ -146,6 +187,10 @@ public class Parser {
         }
     }
     
+    /**
+     * This is a helper method to match an ID token and get the ID string
+     * @return 
+     */
     private String matchIDToken() {
         String str;
         Token nextToken = scan.viewNextToken();
@@ -159,6 +204,10 @@ public class Parser {
         return str;
     }
     
+    /**
+     * This is a helper method to match a NUM token and get the int value
+     * @return 
+     */
     private int matchNumToken() {
         int num;
         Token nextToken = scan.viewNextToken();
