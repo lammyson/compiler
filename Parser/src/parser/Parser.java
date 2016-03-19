@@ -267,6 +267,87 @@ public class Parser {
         return new ReturnStatement(expr);
     }
     
+    private Expression parseExpression() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        Expression expr;
+        if (type == TokenType.NUM_TOKEN) {
+           
+        }
+        return expr;
+    }
+    
+    private VarCallExpression parseVarCall(String id) {
+        TokenType type = scan.viewNextToken().getTokenType();
+        IdExpression idExpr = new IdExpression(id);
+        Expression arrayExpr = null;
+        ArrayList<Expression> argList = new ArrayList<Expression>();
+        int varOrCall;
+        if (type == TokenType.LPAREN_TOKEN) {
+            matchToken(TokenType.LPAREN_TOKEN);
+            argList = parseArgs();
+            matchToken(TokenType.RPAREN_TOKEN);
+            varOrCall = 1;
+        } else if (type == TokenType.LSBRACK_TOKEN) {
+            matchToken(TokenType.LSBRACK_TOKEN);
+            arrayExpr = parseExpression();
+            matchToken(TokenType.RSBRACK_TOKEN);
+            varOrCall = 0;
+        } else if (checkFactorFollowSet(type)) {
+            varOrCall = 0;
+        } else {
+            throw new ParseError("Error in parseVarCall: unexpected token "
+                    + scan.viewNextToken().getTokenType());
+        }
+        return new VarCallExpression(idExpr, arrayExpr, argList, varOrCall);
+    }
+    
+    private ArrayList<Expression> parseArgs() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.INT_TOKEN || type == TokenType.NUM_TOKEN) {
+            return parseArgsList();
+        } else if (type == TokenType.RPAREN_TOKEN) {
+            return null;
+        } else {
+            throw new ParseError("Error in parseArgs: unexpected token "
+                    + scan.viewNextToken().getTokenType());
+        }
+    }
+    
+    private ArrayList<Expression> parseArgsList() {
+        ArrayList<Expression> argList = new ArrayList<Expression>();
+        argList.add(parseExpression());
+        while (scan.viewNextToken().getTokenType() == TokenType.COMMA_TOKEN) {
+            matchToken(TokenType.COMMA_TOKEN);
+            TokenType type = scan.viewNextToken().getTokenType();
+            if (type == TokenType.NUM_TOKEN ||
+                type == TokenType.LPAREN_TOKEN ||
+                type == TokenType.ID_TOKEN) {
+                argList.add(parseExpression());
+            } else {
+                throw new ParseError("Error in parseArgsList: unexpected token "
+                    + scan.viewNextToken().getTokenType());
+            }
+        }
+        return argList;
+    }
+    
+    private boolean checkFactorFollowSet(TokenType type) {
+        return (type == TokenType.MUL_TOKEN ||
+            type == TokenType.DIV_TOKEN ||
+            type == TokenType.ADD_TOKEN ||
+            type == TokenType.SUB_TOKEN ||
+            type == TokenType.LESS_EQ_TOKEN ||
+            type == TokenType.LESS_TOKEN ||
+            type == TokenType.GREAT_TOKEN ||
+            type == TokenType.GREAT_EQ_TOKEN ||
+            type == TokenType.EQUAL_TOKEN ||
+            type == TokenType.NOT_EQ_TOKEN ||
+            type == TokenType.SEMI_TOKEN ||
+            type == TokenType.RPAREN_TOKEN ||
+            type == TokenType.RSBRACK_TOKEN ||
+            type == TokenType.COMMA_TOKEN);
+    }
+    
     
     
     
