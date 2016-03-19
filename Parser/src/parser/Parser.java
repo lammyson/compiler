@@ -32,6 +32,7 @@ public class Parser {
         TokenType type = scan.viewNextToken().getTokenType();
         while (type == TokenType.INT_TOKEN || type == TokenType.VOID_TOKEN) {
             declList.add(parseDeclaration());
+            type = scan.viewNextToken().getTokenType();
         }
         if (scan.viewNextToken().getTokenType() != TokenType.EOF_TOKEN) {
             throw new ParseError("Error in parseProgram: expected EOF");
@@ -55,8 +56,8 @@ public class Parser {
             String id = matchIDToken();
             decl = parseFunDeclaration2(0, id);
         } else {
-            throw new ParseError("Error in parseDeclaration: unexpected token" +
-                    scan.viewNextToken().getTokenType());
+            throw new ParseError("Error in parseDeclaration: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
         }
         return decl;
     }
@@ -80,7 +81,7 @@ public class Parser {
         } else if (type == TokenType.LPAREN_TOKEN) {
             return parseFunDeclaration2(1, id);
         } else {
-            throw new ParseError("Error in ParseDeclaration2: unexpected token" 
+            throw new ParseError("Error in ParseDeclaration2: unexpected token " 
                     + scan.viewNextToken().getTokenType());
         }
     }
@@ -105,7 +106,7 @@ public class Parser {
      * This method parses a var-declaration
      * @return 
      */
-    private Declaration parseVarDeclaration() {
+    private VarDeclaration parseVarDeclaration() {
         matchToken(TokenType.INT_TOKEN);
         String id = matchIDToken();
         if (scan.viewNextToken().getTokenType() == TokenType.LSBRACK_TOKEN) {
@@ -132,7 +133,7 @@ public class Parser {
             matchToken(TokenType.VOID_TOKEN);
             return null;
         } else {
-            throw new ParseError("Error in parseParams: unexpected token" 
+            throw new ParseError("Error in parseParams: unexpected token " 
                     + scan.viewNextToken().getTokenType());
         }
     }
@@ -167,10 +168,106 @@ public class Parser {
                    type == TokenType.RPAREN_TOKEN) {
             return new Param(new IdExpression(id), false);
         } else {
-            throw new ParseError("Error in parseParam: unexpected token" 
+            throw new ParseError("Error in parseParam: unexpected token " 
                     + scan.viewNextToken().getTokenType());
         }
     }
+    
+    private CompoundStatement parseCompoundStmt() {
+        ArrayList<VarDeclaration> declList = new ArrayList<VarDeclaration>();
+        ArrayList<Statement> stmtList = new ArrayList<Statement>();
+        TokenType type = scan.viewNextToken().getTokenType();
+        matchToken(TokenType.LCBRACK_TOKEN);
+        while (type == TokenType.INT_TOKEN) {
+            declList.add(parseVarDeclaration());
+            type = scan.viewNextToken().getTokenType();
+        }
+        while (type == TokenType.LCBRACK_TOKEN ||
+               type == TokenType.NUM_TOKEN ||
+               type == TokenType.LPAREN_TOKEN ||
+               type == TokenType.ID_TOKEN ||
+               type == TokenType.SEMI_TOKEN ||
+               type == TokenType.IF_TOKEN ||
+               type == TokenType.WHILE_TOKEN ||
+               type == TokenType.RET_TOKEN) {
+            stmtList.add(parseStatement());
+            type = scan.viewNextToken().getTokenType();
+        }
+        matchToken(TokenType.RCBRACK_TOKEN);
+        return new CompoundStatement(declList, stmtList);
+    }
+    
+    private Statement parseStatement() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.NUM_TOKEN ||
+            type == TokenType.LPAREN_TOKEN ||
+            type == TokenType.ID_TOKEN ||
+            type == TokenType.SEMI_TOKEN) {
+            return parseExpressionStmt();
+        } else if (type == TokenType.LCBRACK_TOKEN) {
+            return parseCompoundStmt();
+        } else if (type == TokenType.IF_TOKEN) {
+            return parseSelectionStmt();
+        } else if (type == TokenType.WHILE_TOKEN) {
+            return parseIterationStmt();
+        } else if (type == TokenType.RET_TOKEN) {
+            return parseReturnStmt();
+        } else {
+            throw new ParseError("Error in parseStatment: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
+        }
+    }
+    
+    private ExpressionStatement parseExpressionStmt() {
+        Expression expr = null;
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.NUM_TOKEN ||
+            type == TokenType.LPAREN_TOKEN ||
+            type == TokenType.ID_TOKEN) {
+            expr = parseExpression();
+        }
+        matchToken(TokenType.SEMI_TOKEN);
+        return new ExpressionStatement(expr);
+    }
+    
+    private SelectionStatement parseSelectionStmt() {
+        matchToken(TokenType.IF_TOKEN);
+        matchToken(TokenType.LPAREN_TOKEN);
+        Expression expr = parseExpression();
+        matchToken(TokenType.RPAREN_TOKEN);
+        Statement ifStmt = parseStatement();
+        Statement elseStmt = null;
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.ELSE_TOKEN) {
+            matchToken(TokenType.ELSE_TOKEN);
+            elseStmt = parseStatement();
+        }
+        return new SelectionStatement(expr, ifStmt, elseStmt);
+    }
+    
+    private IterationStatement parseIterationStmt() {
+        matchToken(TokenType.WHILE_TOKEN);
+        matchToken(TokenType.LPAREN_TOKEN);
+        Expression expr = parseExpression();
+        matchToken(TokenType.RPAREN_TOKEN);
+        Statement stmt = parseStatement();
+        return new IterationStatement(expr, stmt);
+    }
+    
+    private ReturnStatement parseReturnStmt() {
+        matchToken(TokenType.RET_TOKEN);
+        Expression expr = null;
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.NUM_TOKEN ||
+            type == TokenType.LPAREN_TOKEN ||
+            type == TokenType.ID_TOKEN) {
+            expr = parseExpression();
+        }
+        matchToken(TokenType.SEMI_TOKEN);
+        return new ReturnStatement(expr);
+    }
+    
+    
     
     
     
