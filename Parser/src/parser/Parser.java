@@ -5,6 +5,8 @@ import scanner.CMinusScanner;
 import scanner.Token;
 import scanner.Token.TokenType;
 
+NEED TO ADD throw new ParseError() to every method
+
 /**
  * This class will implement a C Minus Parser
  * @author Ryan
@@ -173,6 +175,10 @@ public class Parser {
         }
     }
     
+    /**
+     * This method parses a compound-stmt
+     * @return 
+     */
     private CompoundStatement parseCompoundStmt() {
         ArrayList<VarDeclaration> declList = new ArrayList<VarDeclaration>();
         ArrayList<Statement> stmtList = new ArrayList<Statement>();
@@ -197,6 +203,10 @@ public class Parser {
         return new CompoundStatement(declList, stmtList);
     }
     
+    /**
+     * This method parses a statement
+     * @return 
+     */
     private Statement parseStatement() {
         TokenType type = scan.viewNextToken().getTokenType();
         if (type == TokenType.NUM_TOKEN ||
@@ -218,6 +228,10 @@ public class Parser {
         }
     }
     
+    /**
+     * This method parses an expression-stmt
+     * @return 
+     */
     private ExpressionStatement parseExpressionStmt() {
         Expression expr = null;
         TokenType type = scan.viewNextToken().getTokenType();
@@ -230,6 +244,10 @@ public class Parser {
         return new ExpressionStatement(expr);
     }
     
+    /**
+     * This method parses a selection-stmt
+     * @return 
+     */
     private SelectionStatement parseSelectionStmt() {
         matchToken(TokenType.IF_TOKEN);
         matchToken(TokenType.LPAREN_TOKEN);
@@ -245,6 +263,10 @@ public class Parser {
         return new SelectionStatement(expr, ifStmt, elseStmt);
     }
     
+    /**
+     * This method parses an iteration-stmt
+     * @return 
+     */
     private IterationStatement parseIterationStmt() {
         matchToken(TokenType.WHILE_TOKEN);
         matchToken(TokenType.LPAREN_TOKEN);
@@ -254,6 +276,10 @@ public class Parser {
         return new IterationStatement(expr, stmt);
     }
     
+    /**
+     * This method parses a return-stmt
+     * @return 
+     */
     private ReturnStatement parseReturnStmt() {
         matchToken(TokenType.RET_TOKEN);
         Expression expr = null;
@@ -267,15 +293,139 @@ public class Parser {
         return new ReturnStatement(expr);
     }
     
+    /**
+     * This method parses an expression
+     * @return 
+     */
     private Expression parseExpression() {
         TokenType type = scan.viewNextToken().getTokenType();
-        Expression expr;
+        Expression expr = null;
         if (type == TokenType.NUM_TOKEN) {
-           
+            int num = matchNumToken();
+            NumExpression numExpr = new NumExpression(num);
+            expr = parseSimpleExpression(numExpr);
+        } else if (type == TokenType.LPAREN_TOKEN) {
+            matchToken(TokenType.LPAREN_TOKEN);
+            Expression expr1 = parseExpression();
+            matchToken(TokenType.RPAREN_TOKEN);
+            expr = parseSimpleExpression(expr1);
+        } else if (type == TokenType.ID_TOKEN) {
+            String id = matchIDToken();
+            IdExpression idExpr = new IdExpression(id);
+            expr = parseExpression1(idExpr);
         }
         return expr;
     }
     
+    /**
+     * This method parses an expression prime
+     * @param id used to make var, array var, call, or simple-expression
+     * @return 
+     */
+    private Expression parseExpression1(IdExpression id) {
+        TokenType type = scan.viewNextToken().getTokenType();
+        Expression expr = null;
+        if (type == TokenType.ASSIGN_TOKEN) {
+            matchToken(TokenType.ASSIGN_TOKEN);
+            VarCallExpression var = new VarCallExpression(id, null, null, 0);
+            Expression expr1 = parseExpression();
+            expr = new AssignExpression(var, expr1);
+        } else if (type == TokenType.LSBRACK_TOKEN) {
+            matchToken(TokenType.LSBRACK_TOKEN);
+            Expression expr1 = parseExpression();
+            VarCallExpression var = new VarCallExpression(id, expr1, null, 0);
+            expr = parseExpression2(var);
+        } else if (type == TokenType.LPAREN_TOKEN) {
+            matchToken(TokenType.LPAREN_TOKEN);
+            ArrayList<Expression> args = parseArgs();
+            VarCallExpression call = new VarCallExpression(id, null, args, 1);
+            expr = parseSimpleExpression(call);
+        } else if (checkFactorFollowSet(type)) {
+            expr = parseSimpleExpression(id);
+        }
+        return expr;
+    }
+    
+    /**
+     * Thie method parses an expression double prime
+     * @param var
+     * @return 
+     */
+    private Expression parseExpression2(VarCallExpression var) {
+        TokenType type = scan.viewNextToken().getTokenType();
+        Expression expr = null;
+        if (type == TokenType.ASSIGN_TOKEN) {
+            matchToken(TokenType.ASSIGN_TOKEN);
+            Expression expr1 = parseExpression();
+            expr = new AssignExpression(var, expr1);
+        } else if (checkFactorFollowSet(type)) {
+            expr = parseSimpleExpression(var);
+        }
+        return expr;
+    }
+    
+    /**
+     * This method parses a simple-expression
+     * @param lhs of a possible BinaryExpression
+     * @return 
+     */
+    private Expression parseSimpleExpression(Expression lhs) {
+        Expression expr = parseAdditiveExpression(); //Can be null
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.ADD_TOKEN          ||
+                type == TokenType.SUB_TOKEN      ||
+                type == TokenType.MUL_TOKEN      ||
+                type == TokenType.DIV_TOKEN      ||
+                type == TokenType.LESS_TOKEN     ||
+                type == TokenType.LESS_EQ_TOKEN  ||
+                type == TokenType.GREAT_TOKEN    ||
+                type == TokenType.GREAT_EQ_TOKEN ||
+                type == TokenType.EQUAL_TOKEN    ||
+                type == TokenType.NOT_EQ_TOKEN) {
+            TokenType op = type;
+            Expression rhs = parseAdditiveExpression();
+            BinaryExpression binExpr = new BinaryExpression(lhs, op, rhs);
+            return binExpr;
+        } else if (type == TokenType.SEMI_TOKEN ||
+                type == TokenType.RPAREN_TOKEN  ||
+                type == TokenType.RSBRACK_TOKEN ||
+                type == TokenType.COMMA_TOKEN) {
+            return expr;
+        } else {
+            throw new ParseError("Error in parseSimpleExpression: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
+        }
+    }
+    
+    //parseAdditiveExpression
+    private Expression parseAdditiveExpression() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        Expression expr = null;
+        
+        return expr;
+    }
+    
+    //parseTerm
+    private Expression parseTerm() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        Expression expr = null;
+        
+        return expr;
+    }
+    
+    //parseFactor
+    private Expression parseFactor() {
+        TokenType type = scan.viewNextToken().getTokenType();
+        Expression expr = null;
+        
+        return expr;
+    }
+    
+    /**
+     * This method parses a varcall
+     * @param id needed to create the IdExpression for var, array var, or call
+     * @return 
+     */
     private VarCallExpression parseVarCall(String id) {
         TokenType type = scan.viewNextToken().getTokenType();
         IdExpression idExpr = new IdExpression(id);
@@ -301,6 +451,10 @@ public class Parser {
         return new VarCallExpression(idExpr, arrayExpr, argList, varOrCall);
     }
     
+    /**
+     * This method parses an args
+     * @return 
+     */
     private ArrayList<Expression> parseArgs() {
         TokenType type = scan.viewNextToken().getTokenType();
         if (type == TokenType.INT_TOKEN || type == TokenType.NUM_TOKEN) {
@@ -313,6 +467,10 @@ public class Parser {
         }
     }
     
+    /**
+     * This method parses an args-list
+     * @return 
+     */
     private ArrayList<Expression> parseArgsList() {
         ArrayList<Expression> argList = new ArrayList<Expression>();
         argList.add(parseExpression());
@@ -331,6 +489,11 @@ public class Parser {
         return argList;
     }
     
+    /**
+     * Thie method takes type and checks if it is in the follow set of factor
+     * @param type
+     * @return 
+     */
     private boolean checkFactorFollowSet(TokenType type) {
         return (type == TokenType.MUL_TOKEN ||
             type == TokenType.DIV_TOKEN ||
@@ -347,11 +510,7 @@ public class Parser {
             type == TokenType.RSBRACK_TOKEN ||
             type == TokenType.COMMA_TOKEN);
     }
-    
-    
-    
-    
-    
+
     /**
      * This is a helper method to help match tokens
      * @param type 
@@ -405,5 +564,4 @@ public class Parser {
     public static void main(String[] args) {
         // TODO code application logic here
     }
-    
 }
