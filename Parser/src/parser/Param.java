@@ -11,7 +11,7 @@ public class Param {
     /**
      * This variable holds the id of the param
      */
-    private IdExpression identifier;
+    private String identifier;
     
     /**
      * This variable tells if the param is of type array
@@ -24,7 +24,7 @@ public class Param {
      * @param id
      * @param array 
      */
-    public Param(IdExpression id, boolean array) {
+    public Param(String id, boolean array) {
         identifier = id;
         arrayType  = array;
     }

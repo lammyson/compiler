@@ -10,7 +10,7 @@ public class VarDeclaration extends Declaration {
     /**
      * This variable holds the name of the variable
      */
-    private IdExpression  identifier;
+    private String  identifier;
     
     /**
      * This variable holds the size of the array
@@ -23,7 +23,7 @@ public class VarDeclaration extends Declaration {
      * @param id
      * @param n 
      */
-    public VarDeclaration(IdExpression id, int n) {
+    public VarDeclaration(String id, int n) {
         identifier = id;
         num        = n;
     }

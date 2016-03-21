@@ -9,7 +9,7 @@ public class AssignExpression extends Expression {
     /**
      * This holds the var that will take the expression value
      */
-    private VarCallExpression var;
+    private VarExpression var;
     
     /**
      * This holds the expression that will be assigned into the var
@@ -21,7 +21,7 @@ public class AssignExpression extends Expression {
      * @param v
      * @param expr 
      */
-    public AssignExpression(VarCallExpression v, Expression expr) {
+    public AssignExpression(VarExpression v, Expression expr) {
         var        = v;
         expression = expr;
     }

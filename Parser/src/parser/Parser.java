@@ -73,13 +73,13 @@ public class Parser {
         TokenType type = scan.viewNextToken().getTokenType();
         if (type == TokenType.SEMI_TOKEN) {
             matchToken(TokenType.SEMI_TOKEN);
-            return new VarDeclaration(new IdExpression(id), -1);
+            return new VarDeclaration(id, -1);
         } else if (type == TokenType.LSBRACK_TOKEN) {
             matchToken(TokenType.LSBRACK_TOKEN);
             int num = matchNumToken();
             matchToken(TokenType.RSBRACK_TOKEN);
             matchToken(TokenType.SEMI_TOKEN);
-            return new VarDeclaration(new IdExpression(id), num);
+            return new VarDeclaration(id, num);
         } else if (type == TokenType.LPAREN_TOKEN) {
             return parseFunDeclaration2(1, id);
         } else {
@@ -100,7 +100,7 @@ public class Parser {
         ArrayList<Param> params = parseParams();
         matchToken(TokenType.RPAREN_TOKEN);
         CompoundStatement cstmt = parseCompoundStmt();
-        return new FunDeclaration(returnType, new IdExpression(id),
+        return new FunDeclaration(returnType, id,
                 params, cstmt);
     }
     
@@ -116,10 +116,10 @@ public class Parser {
             int num = matchNumToken();
             matchToken(TokenType.RSBRACK_TOKEN);
             matchToken(TokenType.SEMI_TOKEN);
-            return new VarDeclaration(new IdExpression(id), num);
+            return new VarDeclaration(id, num);
         } else {
             matchToken(TokenType.SEMI_TOKEN);
-            return new VarDeclaration(new IdExpression(id), -1);
+            return new VarDeclaration(id, -1);
         }
     }
     
@@ -165,10 +165,10 @@ public class Parser {
         if (type == TokenType.LSBRACK_TOKEN) {
             matchToken(TokenType.LSBRACK_TOKEN);
             matchToken(TokenType.RSBRACK_TOKEN);
-            return new Param(new IdExpression(id), true);
+            return new Param(id, true);
         } else if (type == TokenType.COMMA_TOKEN || 
                    type == TokenType.RPAREN_TOKEN) {
-            return new Param(new IdExpression(id), false);
+            return new Param(id, false);
         } else {
             throw new ParseError("Error in parseParam: unexpected token " 
                     + scan.viewNextToken().getTokenType());
@@ -288,7 +288,7 @@ public class Parser {
             type == TokenType.LPAREN_TOKEN ||
             type == TokenType.ID_TOKEN) {
             expr = parseExpression();
-        }
+        } 
         matchToken(TokenType.SEMI_TOKEN);
         return new ReturnStatement(expr);
     }
@@ -302,8 +302,7 @@ public class Parser {
         Expression expr = null;
         if (type == TokenType.NUM_TOKEN) {
             int num = matchNumToken();
-            NumExpression numExpr = new NumExpression(num);
-            expr = parseSimpleExpression(numExpr);
+            expr = parseSimpleExpression(new NumExpression(num));
         } else if (type == TokenType.LPAREN_TOKEN) {
             matchToken(TokenType.LPAREN_TOKEN);
             Expression expr1 = parseExpression();
@@ -311,8 +310,10 @@ public class Parser {
             expr = parseSimpleExpression(expr1);
         } else if (type == TokenType.ID_TOKEN) {
             String id = matchIDToken();
-            IdExpression idExpr = new IdExpression(id);
-            expr = parseExpression1(idExpr);
+            expr = parseExpression1(id);
+        } else {
+            throw new ParseError("Error in parseExpression: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
         }
         return expr;
     }
@@ -322,26 +323,28 @@ public class Parser {
      * @param id used to make var, array var, call, or simple-expression
      * @return 
      */
-    private Expression parseExpression1(IdExpression id) {
+    private Expression parseExpression1(String id) {
         TokenType type = scan.viewNextToken().getTokenType();
         Expression expr = null;
         if (type == TokenType.ASSIGN_TOKEN) {
+            VarExpression lhs = new VarExpression(id, null);
             matchToken(TokenType.ASSIGN_TOKEN);
-            VarCallExpression var = new VarCallExpression(id, null, null, 0);
-            Expression expr1 = parseExpression();
-            expr = new AssignExpression(var, expr1);
+            Expression rhs = parseExpression();
+            expr = new AssignExpression(lhs, rhs);
         } else if (type == TokenType.LSBRACK_TOKEN) {
             matchToken(TokenType.LSBRACK_TOKEN);
             Expression expr1 = parseExpression();
-            VarCallExpression var = new VarCallExpression(id, expr1, null, 0);
-            expr = parseExpression2(var);
+            VarExpression arrayExpr = new VarExpression(id, expr1);
+            matchToken(TokenType.RSBRACK_TOKEN);
+            expr = parseExpression2(arrayExpr);
         } else if (type == TokenType.LPAREN_TOKEN) {
             matchToken(TokenType.LPAREN_TOKEN);
             ArrayList<Expression> args = parseArgs();
-            VarCallExpression call = new VarCallExpression(id, null, args, 1);
+            matchToken(TokenType.RPAREN_TOKEN);
+            CallExpression call = new CallExpression(id, args);
             expr = parseSimpleExpression(call);
         } else if (checkFactorFollowSet(type)) {
-            expr = parseSimpleExpression(id);
+            expr = parseSimpleExpression(new VarExpression(id, null));
         }
         return expr;
     }
@@ -351,13 +354,13 @@ public class Parser {
      * @param var
      * @return 
      */
-    private Expression parseExpression2(VarCallExpression var) {
+    private Expression parseExpression2(VarExpression var) {
         TokenType type = scan.viewNextToken().getTokenType();
         Expression expr = null;
         if (type == TokenType.ASSIGN_TOKEN) {
             matchToken(TokenType.ASSIGN_TOKEN);
-            Expression expr1 = parseExpression();
-            expr = new AssignExpression(var, expr1);
+            Expression rhs = parseExpression();
+            expr = new AssignExpression(var, rhs);
         } else if (checkFactorFollowSet(type)) {
             expr = parseSimpleExpression(var);
         }
@@ -369,28 +372,24 @@ public class Parser {
      * @param lhs of a possible BinaryExpression
      * @return 
      */
-    private Expression parseSimpleExpression(Expression lhs) {
-        Expression expr = parseAdditiveExpression(); //Can be null
+    private Expression parseSimpleExpression(Expression expr) {
+        Expression lhs = parseAdditiveExpression(expr); //Can be null
         TokenType type = scan.viewNextToken().getTokenType();
-        if (type == TokenType.ADD_TOKEN          ||
-                type == TokenType.SUB_TOKEN      ||
-                type == TokenType.MUL_TOKEN      ||
-                type == TokenType.DIV_TOKEN      ||
-                type == TokenType.LESS_TOKEN     ||
+        if (type == TokenType.LESS_TOKEN     ||
                 type == TokenType.LESS_EQ_TOKEN  ||
                 type == TokenType.GREAT_TOKEN    ||
                 type == TokenType.GREAT_EQ_TOKEN ||
                 type == TokenType.EQUAL_TOKEN    ||
                 type == TokenType.NOT_EQ_TOKEN) {
-            TokenType op = type;
-            Expression rhs = parseAdditiveExpression();
-            BinaryExpression binExpr = new BinaryExpression(lhs, op, rhs);
+            scan.getNextToken();
+            Expression rhs = parseAdditiveExpression(null);
+            BinaryExpression binExpr = new BinaryExpression(lhs, type, rhs);
             return binExpr;
         } else if (type == TokenType.SEMI_TOKEN ||
                 type == TokenType.RPAREN_TOKEN  ||
                 type == TokenType.RSBRACK_TOKEN ||
                 type == TokenType.COMMA_TOKEN) {
-            return expr;
+            return lhs;
         } else {
             throw new ParseError("Error in parseSimpleExpression: unexpected token " 
                     + scan.viewNextToken().getTokenType());
@@ -398,26 +397,55 @@ public class Parser {
     }
     
     //parseAdditiveExpression
-    private Expression parseAdditiveExpression() {
+    private Expression parseAdditiveExpression(Expression expr) {
+        Expression newExpr;
+        Expression lhs = parseTerm(expr);
         TokenType type = scan.viewNextToken().getTokenType();
-        Expression expr = null;
-        
-        return expr;
+        while (type == TokenType.ADD_TOKEN || type == TokenType.SUB_TOKEN) {
+            scan.getNextToken();
+            Expression rhs = parseTerm(null);
+            newExpr = new BinaryExpression(lhs, type, rhs);
+            lhs = newExpr;
+            type = scan.viewNextToken().getTokenType();
+        }
+        return lhs;    
     }
     
     //parseTerm
-    private Expression parseTerm() {
+    private Expression parseTerm(Expression expr) {
+        Expression newExpr;
+        Expression lhs;
+        if (expr == null) {
+            lhs = parseFactor();
+        } else {
+            lhs = expr;
+        }
         TokenType type = scan.viewNextToken().getTokenType();
-        Expression expr = null;
-        
-        return expr;
+        while (type == TokenType.MUL_TOKEN || type == TokenType.DIV_TOKEN) {
+            scan.getNextToken();
+            Expression rhs = parseFactor();
+            newExpr = new BinaryExpression(lhs, type, rhs);
+            lhs = newExpr;
+            type = scan.viewNextToken().getTokenType();
+        }
+        return lhs;  
     }
     
     //parseFactor
     private Expression parseFactor() {
         TokenType type = scan.viewNextToken().getTokenType();
         Expression expr = null;
-        
+        if (type == TokenType.LPAREN_TOKEN) {
+            matchToken(TokenType.LPAREN_TOKEN);
+            expr = parseExpression();
+            matchToken(TokenType.RPAREN_TOKEN);
+        } else if (type == TokenType.NUM_TOKEN) {
+            int num = matchNumToken();
+            expr = new NumExpression(num);
+        } else if (type == TokenType.ID_TOKEN) {
+            String id = matchIDToken();
+            expr = parseVarCall(id);
+        }
         return expr;
     }
     
@@ -426,29 +454,26 @@ public class Parser {
      * @param id needed to create the IdExpression for var, array var, or call
      * @return 
      */
-    private VarCallExpression parseVarCall(String id) {
+    private Expression parseVarCall(String id) {
         TokenType type = scan.viewNextToken().getTokenType();
-        IdExpression idExpr = new IdExpression(id);
-        Expression arrayExpr = null;
-        ArrayList<Expression> argList = new ArrayList<Expression>();
-        int varOrCall;
+        Expression expr;
         if (type == TokenType.LPAREN_TOKEN) {
             matchToken(TokenType.LPAREN_TOKEN);
-            argList = parseArgs();
+            ArrayList<Expression> argList = parseArgs();
             matchToken(TokenType.RPAREN_TOKEN);
-            varOrCall = 1;
+            expr = new CallExpression(id, argList);
         } else if (type == TokenType.LSBRACK_TOKEN) {
             matchToken(TokenType.LSBRACK_TOKEN);
-            arrayExpr = parseExpression();
+            Expression arrayExpr = parseExpression();
             matchToken(TokenType.RSBRACK_TOKEN);
-            varOrCall = 0;
+            expr = new VarExpression(id, arrayExpr);
         } else if (checkFactorFollowSet(type)) {
-            varOrCall = 0;
+            expr = new VarExpression(id, null);
         } else {
             throw new ParseError("Error in parseVarCall: unexpected token "
                     + scan.viewNextToken().getTokenType());
         }
-        return new VarCallExpression(idExpr, arrayExpr, argList, varOrCall);
+        return expr;
     }
     
     /**
