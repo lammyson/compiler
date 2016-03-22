@@ -34,7 +34,7 @@ public class NumExpression extends Expression {
             out.write("NumExpression " + num + '\n');
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in CompoundStatement");
+            System.out.println("Error writing to file in NumExpression");
         }
     }
 }

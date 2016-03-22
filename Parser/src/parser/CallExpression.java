@@ -41,24 +41,14 @@ public class CallExpression extends Expression {
                 out.write("  ");
             }
             out.write("CallExpression " + id + '\n');
+            
             for (int i = 0; i < argList.size(); i++) {
-                Expression expr = argList.get(i);
-                if (expr instanceof AssignExpression) {
-                    ((AssignExpression) expr).printMe(out, indent+1);
-                } else if (expr instanceof BinaryExpression) {
-                    ((BinaryExpression) expr).printMe(out, indent+1);
-                } else if (expr instanceof CallExpression) {
-                    ((CallExpression) expr).printMe(out, indent+1);
-                } else if (expr instanceof NumExpression) {
-                    ((NumExpression) expr).printMe(out, indent+1);
-                } else if (expr instanceof VarExpression) {
-                    ((VarExpression) expr).printMe(out, indent+1);
-                }
+                argList.get(i).printMe(out, indent+1, argList.get(i));
                 out.write('\n');
             }
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in CompoundStatement");
+            System.out.println("Error writing to file in CallExpression");
         } 
     }
 }

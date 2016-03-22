@@ -50,34 +50,16 @@ public class BinaryExpression extends Expression {
             }
             out.write("BinaryExpression " + operation.toString() + '\n');
             
-            if (lhs instanceof AssignExpression) {
-                ((AssignExpression) lhs).printMe(out, indent + 1);
-            } else if (lhs instanceof BinaryExpression) {
-                ((BinaryExpression) lhs).printMe(out, indent + 1);
-            } else if (lhs instanceof CallExpression) {
-                ((CallExpression) lhs).printMe(out, indent + 1);
-            } else if (lhs instanceof NumExpression) {
-                ((NumExpression) lhs).printMe(out, indent + 1);
-            } else if (lhs instanceof VarExpression) {
-                ((VarExpression) lhs).printMe(out, indent + 1);
-            }
+            lhs.printMe(out, indent+1, lhs);
             out.write('\n');
             
-            if (rhs instanceof AssignExpression) {
-                ((AssignExpression) rhs).printMe(out, indent + 1);
-            } else if (rhs instanceof BinaryExpression) {
-                ((BinaryExpression) rhs).printMe(out, indent + 1);
-            } else if (rhs instanceof CallExpression) {
-                ((CallExpression) rhs).printMe(out, indent + 1);
-            } else if (rhs instanceof NumExpression) {
-                ((NumExpression) rhs).printMe(out, indent + 1);
-            } else if (rhs instanceof VarExpression) {
-                ((VarExpression) rhs).printMe(out, indent + 1);
+            if (rhs != null) {
+                rhs.printMe(out, indent+1, rhs);
+                out.write('\n');
             }
-            out.write('\n');
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in CompoundStatement");
+            System.out.println("Error writing to file in BinaryExpression");
         }
     }
 }

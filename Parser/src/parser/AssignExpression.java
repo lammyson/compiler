@@ -42,22 +42,13 @@ public class AssignExpression extends Expression {
             out.write("AssignExpression\n");
             
             var.printMe(out, indent+1);
+            out.write('\n');
             
-            if (expression instanceof AssignExpression) {
-                ((AssignExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof BinaryExpression) {
-                ((BinaryExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof CallExpression) {
-                ((CallExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof NumExpression) {
-                ((NumExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof VarExpression) {
-                ((VarExpression) expression).printMe(out, indent + 1);
-            }
+            expression.printMe(out, indent+1, expression);
             out.write('\n');
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in CompoundStatement");
+            System.out.println("Error writing to file in AssignExpression");
         } 
     }
 }
