@@ -27,6 +27,8 @@ public class SelectionStatement extends Statement {
     /**
      * Constructor
      * @param expr 
+     * @param ifstmt 
+     * @param elsestmt 
      */
     public SelectionStatement(Expression expr, Statement ifstmt, Statement elsestmt) {
         expression    = expr;
@@ -36,8 +38,10 @@ public class SelectionStatement extends Statement {
     
     /**
      * This method will print the attributes of SelectionStatement
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     } 
 }

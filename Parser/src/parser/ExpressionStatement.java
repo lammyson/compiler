@@ -23,8 +23,10 @@ public class ExpressionStatement extends Statement {
     
     /**
      * This method prints the attributes of ExpressionStatement
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }

@@ -41,7 +41,21 @@ public class CompoundStatement extends Statement {
             for (int i = 0; i < indent; i++) {
                 out.write("  ");
             }
-            
+            out.write('\n');
+            for (int i = 0; i < varDeclarations.size(); i++) {
+                varDeclarations.get(i).printMe(out, indent+1);
+                out.write('\n');
+            }
+            for (int i = 0; i < statements.size(); i++) {
+                //statements.get(i).printMe(out, indent+1);
+                Statement stmt = statements.get(i);
+                if (stmt instanceof CompoundStatement) {
+                    ((CompoundStatement) stmt).printMe(out, indent+1);
+                } else if (stmt instanceof ExpressionStatement) {
+                    ((ExpressionStatement) stmt).printMe(out, indent+1);
+                }
+                out.write('\n');
+            }
         }
         catch (IOException e) {
             System.out.println("Error writing to file in CompoundStatement");

@@ -22,8 +22,10 @@ public class NumExpression extends Expression {
     
     /**
      * This method will print the attributes of IdExpression
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }

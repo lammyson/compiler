@@ -39,8 +39,10 @@ public class BinaryExpression extends Expression {
     
     /**
      * This method will print the attributes of BinaryExpression
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }

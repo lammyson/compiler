@@ -32,8 +32,9 @@ public class CallExpression extends Expression {
     /**
      * This method prints out the attributes of a function call
      * @param out 
+     * @param indent 
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }

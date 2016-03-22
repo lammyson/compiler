@@ -30,8 +30,10 @@ public class VarExpression extends Expression {
     
     /**
      * This method will print the attributes of VarExpression
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }

@@ -31,8 +31,10 @@ public class IterationStatement extends Statement {
     
     /**
      * This method will print the attributes of IterationStatement
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }
