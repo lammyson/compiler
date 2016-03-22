@@ -32,11 +32,13 @@ public class Program {
             out.write("program\n");
             for (int i = 0; i < program.size(); i++) {
                 Declaration decl = program.get(i);
+                out.write("  ");
                 if (decl instanceof VarDeclaration) {
-                    ((VarDeclaration) decl).printMe(out);
+                    ((VarDeclaration) decl).printMe(out, 1);
                 } else if (decl instanceof FunDeclaration) {
-                    ((FunDeclaration) decl).printMe(out);
+                    ((FunDeclaration) decl).printMe(out, 1);
                 }
+                out.write('\n');
             }
         }
         catch (IOException e) {
