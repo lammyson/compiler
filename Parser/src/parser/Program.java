@@ -34,12 +34,7 @@ public class Program {
             }
             out.write("program\n");
             for (int i = 0; i < program.size(); i++) {
-                Declaration decl = program.get(i);
-                if (decl instanceof VarDeclaration) {
-                    ((VarDeclaration) decl).printMe(out, indent+1);
-                } else if (decl instanceof FunDeclaration) {
-                    ((FunDeclaration) decl).printMe(out, indent+1);
-                }
+                program.get(i).printMe(out, indent+1, program.get(i));
                 out.write('\n');
             }
         }

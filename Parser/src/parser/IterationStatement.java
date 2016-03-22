@@ -42,34 +42,14 @@ public class IterationStatement extends Statement {
             }
             out.write("IterationStatement" + '\n');
 
-            if (expression instanceof AssignExpression) {
-                ((AssignExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof BinaryExpression) {
-                ((BinaryExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof CallExpression) {
-                ((CallExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof NumExpression) {
-                ((NumExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof VarExpression) {
-                ((VarExpression) expression).printMe(out, indent + 1);
-            }
+            expression.printMe(out, indent+1, expression);
             out.write('\n');
             
-            if (statement instanceof CompoundStatement) {
-                ((CompoundStatement) statement).printMe(out, indent + 1);
-            } else if (statement instanceof ExpressionStatement) {
-                ((ExpressionStatement) statement).printMe(out, indent + 1);
-            } else if (statement instanceof IterationStatement) {
-                ((IterationStatement) statement).printMe(out, indent + 1);
-            } else if (statement instanceof ReturnStatement) {
-                ((ReturnStatement) statement).printMe(out, indent + 1);
-            } else if (statement instanceof SelectionStatement) {
-                ((SelectionStatement) statement).printMe(out, indent + 1);
-            }
+            statement.printMe(out, indent+1, statement);
             out.write('\n');
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in CompoundStatement");
+            System.out.println("Error writing to file in IterationStatement");
         }
     }
 }

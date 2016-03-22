@@ -1,7 +1,6 @@
 package parser;
 
 import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * This acts as a parent class for:
@@ -13,6 +12,12 @@ import java.io.IOException;
  * @author Ryan
  */
 public abstract class Expression {
+    /**
+     * Helper function for printMe on Expressions
+     * @param out
+     * @param indent
+     * @param expr 
+     */
     public void printMe(FileWriter out, int indent, Expression expr) {
         if (expr instanceof AssignExpression) {
             ((AssignExpression) expr).printMe(out, indent);

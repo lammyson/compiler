@@ -45,8 +45,9 @@ public class Param {
                 out.write("  ");
             }
             out.write("Param " + identifier);
+            
             if (arrayType) {
-                out.write(" []");
+                out.write("[]");
             }
             out.write('\n');
         }

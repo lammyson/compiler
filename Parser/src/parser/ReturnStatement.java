@@ -33,23 +33,15 @@ public class ReturnStatement extends Statement {
             }
             out.write("IterationStatement" + '\n');
 
-            if (expression == null) {
+            if (expression != null) {
+                expression.printMe(out, indent+1, expression);
+            } else {
                 out.write("No return expression");
-            } else if (expression instanceof AssignExpression) {
-                ((AssignExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof BinaryExpression) {
-                ((BinaryExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof CallExpression) {
-                ((CallExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof NumExpression) {
-                ((NumExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof VarExpression) {
-                ((VarExpression) expression).printMe(out, indent + 1);
             }
             out.write('\n');
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in CompoundStatement");
+            System.out.println("Error writing to file in ReturnStatement");
         }
     }
 }

@@ -49,49 +49,21 @@ public class SelectionStatement extends Statement {
             }
             out.write("IterationStatement" + '\n');
 
-            if (expression instanceof AssignExpression) {
-                ((AssignExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof BinaryExpression) {
-                ((BinaryExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof CallExpression) {
-                ((CallExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof NumExpression) {
-                ((NumExpression) expression).printMe(out, indent + 1);
-            } else if (expression instanceof VarExpression) {
-                ((VarExpression) expression).printMe(out, indent + 1);
-            }
+            expression.printMe(out, indent+1, expression);
             out.write('\n');
             
-            if (ifStatement instanceof CompoundStatement) {
-                ((CompoundStatement) ifStatement).printMe(out, indent + 1);
-            } else if (ifStatement instanceof ExpressionStatement) {
-                ((ExpressionStatement) ifStatement).printMe(out, indent + 1);
-            } else if (ifStatement instanceof IterationStatement) {
-                ((IterationStatement) ifStatement).printMe(out, indent + 1);
-            } else if (ifStatement instanceof ReturnStatement) {
-                ((ReturnStatement) ifStatement).printMe(out, indent + 1);
-            } else if (ifStatement instanceof SelectionStatement) {
-                ((SelectionStatement) ifStatement).printMe(out, indent + 1);
-            }
+            ifStatement.printMe(out, indent+1, ifStatement);
             out.write('\n');
             
-            if (elseStatement == null) {
-                
-            } else if (elseStatement instanceof CompoundStatement) {
-                ((CompoundStatement) elseStatement).printMe(out, indent + 1);
-            } else if (elseStatement instanceof ExpressionStatement) {
-                ((ExpressionStatement) elseStatement).printMe(out, indent + 1);
-            } else if (elseStatement instanceof IterationStatement) {
-                ((IterationStatement) elseStatement).printMe(out, indent + 1);
-            } else if (elseStatement instanceof ReturnStatement) {
-                ((ReturnStatement) elseStatement).printMe(out, indent + 1);
-            } else if (elseStatement instanceof SelectionStatement) {
-                ((SelectionStatement) elseStatement).printMe(out, indent + 1);
+            if (elseStatement != null) {
+                elseStatement.printMe(out, indent+1, elseStatement);
+            } else {
+                out.write("No else statement");
             }
             out.write('\n');
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in CompoundStatement");
+            System.out.println("Error writing to file in SelectionStatement");
         }
     } 
 }

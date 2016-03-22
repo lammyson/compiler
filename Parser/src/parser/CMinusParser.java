@@ -631,6 +631,7 @@ public class CMinusParser implements Parser {
             cParse.parse();
             FileWriter writer = new FileWriter(args[1], true);
             cParse.printTree(writer);
+            writer.close();
         }
         catch (FileNotFoundException fnfe) {
             System.out.println("File not found");
