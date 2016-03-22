@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +33,7 @@ public class CompoundStatement extends Statement {
     /**
      * This method will print the attributes of CompoundStatement
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

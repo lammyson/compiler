@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class defines a return-stmt in the C Minus language
  * @author Ryan
@@ -22,7 +24,7 @@ public class ReturnStatement extends Statement {
     /**
      * This method will print the attributes of ReturnStatement
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

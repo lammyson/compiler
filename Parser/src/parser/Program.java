@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +24,7 @@ public class Program {
     /**
      * This method will print the attributes of Program
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

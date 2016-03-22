@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class defines a Var-Declaration in the C Minus language
  * Variables are always of type int
@@ -31,7 +33,7 @@ public class VarDeclaration extends Declaration {
     /**
      * This will print out the attributes of this class
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

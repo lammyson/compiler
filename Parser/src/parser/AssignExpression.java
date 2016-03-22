@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class defines an Assign Expression in the C Minus language
  * It is of the form var = expression;
@@ -29,7 +31,7 @@ public class AssignExpression extends Expression {
     /**
      * This method prints the attributes of AssignExpression
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

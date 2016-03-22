@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class defines an expression-stmt in the C Minus language
  * @author Ryan
@@ -22,7 +24,7 @@ public class ExpressionStatement extends Statement {
     /**
      * This method prints the attributes of ExpressionStatement
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class defines the params nonterminal in the C Minus language
  * It will always be of type int
@@ -32,7 +34,7 @@ public class Param {
     /**
      * This method will print the attributes of a param
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

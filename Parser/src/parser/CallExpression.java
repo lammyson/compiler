@@ -6,6 +6,7 @@
 
 package parser;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +24,7 @@ public class CallExpression extends Expression {
         this.argList = argList;
     }
     
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
     

@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class defines a selection-stmt in the C Minus language
  * It is an if statement with an optional else statement
@@ -35,7 +37,7 @@ public class SelectionStatement extends Statement {
     /**
      * This method will print the attributes of SelectionStatement
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     } 
 }

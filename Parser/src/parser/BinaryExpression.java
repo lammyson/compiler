@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.FileWriter;
 import scanner.Token.TokenType;
 
 /**
@@ -39,7 +40,7 @@ public class BinaryExpression extends Expression {
     /**
      * This method will print the attributes of BinaryExpression
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

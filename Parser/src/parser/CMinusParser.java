@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import scanner.CMinusScanner;
 import scanner.Token;
@@ -16,6 +17,7 @@ public class CMinusParser implements Parser {
      * This holds the C Minus Scanner
      */
     CMinusScanner scan;
+    Program program;
     
     /**
      * Constructor
@@ -25,12 +27,12 @@ public class CMinusParser implements Parser {
         scan = s;
     }
     
-    public void printTree() {
-        
+    public void printTree(FileWriter out) {
+        program.printMe(out);
     }
     
     public void parse() {
-        
+        program = parseProgram();
     }
     
     /**

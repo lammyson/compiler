@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class defines an iteration-stmt of the C Minus language
  * It is a while loop
@@ -30,7 +32,7 @@ public class IterationStatement extends Statement {
     /**
      * This method will print the attributes of IterationStatement
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

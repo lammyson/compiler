@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -47,7 +48,7 @@ public class FunDeclaration extends Declaration {
     /**
      * This method will print the attributes of this class
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

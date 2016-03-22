@@ -1,5 +1,6 @@
 package parser;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +32,7 @@ public class VarExpression extends Expression {
     /**
      * This method will print the attributes of VarExpression
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }

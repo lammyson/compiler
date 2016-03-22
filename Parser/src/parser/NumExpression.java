@@ -1,5 +1,7 @@
 package parser;
 
+import java.io.FileWriter;
+
 /**
  * This class is for the NUM terminal in the C Minus language
  * @author Ryan
@@ -21,7 +23,7 @@ public class NumExpression extends Expression {
     /**
      * This method will print the attributes of IdExpression
      */
-    private void printMe() {
+    public void printMe(FileWriter out) {
         
     }
 }
