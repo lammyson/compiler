@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -36,6 +37,13 @@ public class CompoundStatement extends Statement {
      * @param indent
      */
     public void printMe(FileWriter out, int indent) {
-        
+        try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in CompoundStatement");
+        }
     }
 }

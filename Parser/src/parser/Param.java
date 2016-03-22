@@ -51,7 +51,7 @@ public class Param {
             out.write('\n');
         }
         catch (IOException e) {
-            System.out.println("Error writing to file in Program");
+            System.out.println("Error writing to file in Param");
         }
     }
 }
