@@ -12,13 +12,13 @@ public class VarDeclaration extends Declaration {
     /**
      * This variable holds the name of the variable
      */
-    private String  identifier;
+    private String identifier;
     
     /**
      * This variable holds the size of the array
      * If -1, it is not of type array
      */
-    private int num;
+    private int    num;
     
     /**
      * Constructor
@@ -32,6 +32,7 @@ public class VarDeclaration extends Declaration {
     
     /**
      * This will print out the attributes of this class
+     * @param out
      */
     public void printMe(FileWriter out) {
         
