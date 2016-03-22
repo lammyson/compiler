@@ -41,6 +41,7 @@ public class CompoundStatement extends Statement {
             for (int i = 0; i < indent; i++) {
                 out.write("  ");
             }
+            out.write("CompoundStatement" + '\n');
             for (int i = 0; i < varDeclarations.size(); i++) {
                 varDeclarations.get(i).printMe(out, indent+1);
                 out.write('\n');
