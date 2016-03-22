@@ -207,10 +207,12 @@ public class CMinusParser implements Parser {
         ArrayList<Statement> stmtList = new ArrayList<Statement>();
         TokenType type = scan.viewNextToken().getTokenType();
         matchToken(TokenType.LCBRACK_TOKEN);
+        type = scan.viewNextToken().getTokenType();
         while (type == TokenType.INT_TOKEN) {
             declList.add(parseVarDeclaration());
             type = scan.viewNextToken().getTokenType();
         }
+        type = scan.viewNextToken().getTokenType();
         while (type == TokenType.LCBRACK_TOKEN ||
                type == TokenType.NUM_TOKEN ||
                type == TokenType.LPAREN_TOKEN ||
