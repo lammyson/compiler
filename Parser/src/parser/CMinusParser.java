@@ -19,8 +19,11 @@ public class CMinusParser implements Parser {
     /**
      * This holds the C Minus Scanner
      */
-    CMinusScanner scan;
-    Program program;
+    private CMinusScanner scan;
+    /**
+     * This is the root node of the abstract syntax tree
+     */
+    private Program       program;
     
     /**
      * Constructor
@@ -30,10 +33,17 @@ public class CMinusParser implements Parser {
         scan = s;
     }
     
+    /**
+     * This method prints the abstract syntax tree
+     * @param out 
+     */
     public void printTree(FileWriter out) {
         program.printMe(out);
     }
     
+    /**
+     * This method starts the parsing process
+     */
     public void parse() {
         program = parseProgram();
     }
@@ -409,7 +419,11 @@ public class CMinusParser implements Parser {
         }
     }
     
-    //parseAdditiveExpression
+    /**
+     * This method parses an additive expression
+     * @param expr which is the left hand side
+     * @return 
+     */
     private Expression parseAdditiveExpression(Expression expr) {
         Expression newExpr;
         Expression lhs = parseTerm(expr);
@@ -424,7 +438,11 @@ public class CMinusParser implements Parser {
         return lhs;    
     }
     
-    //parseTerm
+    /**
+     * This method parses a term
+     * @param expr which is the left hand side
+     * @return 
+     */
     private Expression parseTerm(Expression expr) {
         Expression newExpr;
         Expression lhs;
@@ -444,7 +462,10 @@ public class CMinusParser implements Parser {
         return lhs;  
     }
     
-    //parseFactor
+    /**
+     * This method parses a factor
+     * @return 
+     */
     private Expression parseFactor() {
         TokenType type = scan.viewNextToken().getTokenType();
         Expression expr = null;
