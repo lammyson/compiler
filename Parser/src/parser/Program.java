@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -25,6 +26,11 @@ public class Program {
      * This method will print the attributes of Program
      */
     public void printMe(FileWriter out) {
-        
+        try {
+            out.write("program");
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in Program");
+        }
     }
 }
