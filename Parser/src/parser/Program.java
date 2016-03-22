@@ -32,7 +32,7 @@ public class Program {
             for (int i = 0; i < indent; i++) {
                 out.write("  ");
             }
-            out.write("Program\n");
+            out.write("Program");
             
             for (int i = 0; i < program.size(); i++) {
                 out.write('\n');
