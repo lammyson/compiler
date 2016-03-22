@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import scanner.Token.TokenType;
 
 /**
@@ -43,6 +44,40 @@ public class BinaryExpression extends Expression {
      * @param indent
      */
     public void printMe(FileWriter out, int indent) {
-        
+        try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
+            out.write("BinaryExpression " + operation.toString() + '\n');
+            
+            if (lhs instanceof AssignExpression) {
+                ((AssignExpression) lhs).printMe(out, indent + 1);
+            } else if (lhs instanceof BinaryExpression) {
+                ((BinaryExpression) lhs).printMe(out, indent + 1);
+            } else if (lhs instanceof CallExpression) {
+                ((CallExpression) lhs).printMe(out, indent + 1);
+            } else if (lhs instanceof NumExpression) {
+                ((NumExpression) lhs).printMe(out, indent + 1);
+            } else if (lhs instanceof VarExpression) {
+                ((VarExpression) lhs).printMe(out, indent + 1);
+            }
+            out.write('\n');
+            
+            if (rhs instanceof AssignExpression) {
+                ((AssignExpression) rhs).printMe(out, indent + 1);
+            } else if (rhs instanceof BinaryExpression) {
+                ((BinaryExpression) rhs).printMe(out, indent + 1);
+            } else if (rhs instanceof CallExpression) {
+                ((CallExpression) rhs).printMe(out, indent + 1);
+            } else if (rhs instanceof NumExpression) {
+                ((NumExpression) rhs).printMe(out, indent + 1);
+            } else if (rhs instanceof VarExpression) {
+                ((VarExpression) rhs).printMe(out, indent + 1);
+            }
+            out.write('\n');
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in CompoundStatement");
+        }
     }
 }
