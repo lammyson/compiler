@@ -44,7 +44,7 @@ public class Param {
             for (int i = 0; i < indent; i++) {
                 out.write("  ");
             }
-            out.write("  Param " + identifier);
+            out.write("Param " + identifier);
             if (arrayType) {
                 out.write(" []");
             }

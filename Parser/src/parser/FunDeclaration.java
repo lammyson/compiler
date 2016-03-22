@@ -56,7 +56,7 @@ public class FunDeclaration extends Declaration {
             for (int i = 0; i < indent; i++) {
                 out.write("  ");
             }
-            out.write("  FunDecl ");
+            out.write("FunDecl ");
             if (returnType == 0) {
                 out.write("void ");
             } else if (returnType == 1) {

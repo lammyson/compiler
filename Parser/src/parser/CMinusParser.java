@@ -38,7 +38,7 @@ public class CMinusParser implements Parser {
      * @param out 
      */
     public void printTree(FileWriter out) {
-        program.printMe(out);
+        program.printMe(out, 0);
     }
     
     /**
