@@ -1,6 +1,9 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class defines the params nonterminal in the C Minus language
@@ -13,13 +16,13 @@ public class Param {
     /**
      * This variable holds the id of the param
      */
-    private String identifier;
+    private String  identifier;
     
     /**
      * This variable tells if the param is of type array
      * False if not array. true if array.
      */
-    private boolean      arrayType;
+    private boolean arrayType;
     
     /**
      * Constructor
@@ -37,6 +40,18 @@ public class Param {
      * @param indent
      */
     public void printMe(FileWriter out, int indent) {
-        
+        try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
+            out.write("  Param " + identifier);
+            if (arrayType) {
+                out.write(" []");
+            }
+            out.write('\n');
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in Program");
+        }
     }
 }
