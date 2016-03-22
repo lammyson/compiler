@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * This class defines a Var-Declaration in the C Minus language
@@ -33,8 +34,17 @@ public class VarDeclaration extends Declaration {
     /**
      * This will print out the attributes of this class
      * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
-        
+    public void printMe(FileWriter out, int indent) {
+        try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
+            out.write("  VarDecl " + identifier + " " + num + '\n');
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in Program");
+        }
     }
 }
