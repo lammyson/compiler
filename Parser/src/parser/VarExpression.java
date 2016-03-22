@@ -1,7 +1,6 @@
 package parser;
 
 import java.io.FileWriter;
-import java.util.ArrayList;
 
 /**
  * This class encapsulates variables in the C Minus language
@@ -12,12 +11,12 @@ public class VarExpression extends Expression {
     /**
      * This variable holds the ID of the var 
      */
-    private String          identifier;
+    private String     identifier;
     
     /**
      * This variable holds an expression for an array var. Can be null.
      */
-    private Expression            expression;
+    private Expression expression;
     
     /**
      * Constructor
