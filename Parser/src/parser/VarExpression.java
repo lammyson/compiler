@@ -41,8 +41,11 @@ public class VarExpression extends Expression {
             }
             out.write("VarExpression " + identifier + '\n');
             
-            expression.printMe(out, indent+1, expression);
-            out.write('\n');
+            if (expression != null) {
+                expression.printMe(out, indent+1, expression);
+                out.write('\n');
+            }
+            
         }
         catch (IOException e) {
             System.out.println("Error writing to file in VarExpression");

@@ -47,7 +47,7 @@ public class SelectionStatement extends Statement {
             for (int i = 0; i < indent; i++) {
                 out.write("  ");
             }
-            out.write("IterationStatement" + '\n');
+            out.write("SelectionStatement" + '\n');
 
             expression.printMe(out, indent+1, expression);
             out.write('\n');

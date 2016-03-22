@@ -33,9 +33,11 @@ public class ExpressionStatement extends Statement {
                 out.write("  ");
             }
             out.write("ExpressionStatement" + '\n');
-
-            expression.printMe(out, indent+1, expression);
-            out.write('\n');
+            if (expression != null) {
+                expression.printMe(out, indent+1, expression);
+                out.write('\n');
+            }
+            
         }
         catch (IOException e) {
             System.out.println("Error writing to file in ExpressionStatement");

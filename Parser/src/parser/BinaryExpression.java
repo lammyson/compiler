@@ -53,10 +53,8 @@ public class BinaryExpression extends Expression {
             lhs.printMe(out, indent+1, lhs);
             out.write('\n');
             
-            if (rhs != null) {
-                rhs.printMe(out, indent+1, rhs);
-                out.write('\n');
-            }
+            rhs.printMe(out, indent+1, rhs);
+            out.write('\n');
         }
         catch (IOException e) {
             System.out.println("Error writing to file in BinaryExpression");
