@@ -612,11 +612,9 @@ public class CMinusParser implements Parser {
             cParse.printTree(writer);
         }
         catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
             System.out.println("File not found");
         }
         catch (IOException ioe) {
-            ioe.printStackTrace();
             System.out.println("Problem writing to file");
         }
     }   
