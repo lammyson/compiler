@@ -3,6 +3,7 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class is the root for an abstract syntax tree
@@ -24,10 +25,19 @@ public class Program {
     
     /**
      * This method will print the attributes of Program
+     * @param out
      */
     public void printMe(FileWriter out) {
         try {
-            out.write("program");
+            out.write("program\n");
+            for (int i = 0; i < program.size(); i++) {
+                Declaration decl = program.get(i);
+                if (decl instanceof VarDeclaration) {
+                    ((VarDeclaration) decl).printMe(out);
+                } else if (decl instanceof FunDeclaration) {
+                    ((FunDeclaration) decl).printMe(out);
+                }
+            }
         }
         catch (IOException e) {
             System.out.println("Error writing to file in Program");
