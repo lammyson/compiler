@@ -27,16 +27,18 @@ public class Program {
      * This method will print the attributes of Program
      * @param out
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
             out.write("program\n");
             for (int i = 0; i < program.size(); i++) {
                 Declaration decl = program.get(i);
-                out.write("  ");
                 if (decl instanceof VarDeclaration) {
-                    ((VarDeclaration) decl).printMe(out, 1);
+                    ((VarDeclaration) decl).printMe(out, indent+1);
                 } else if (decl instanceof FunDeclaration) {
-                    ((FunDeclaration) decl).printMe(out, 1);
+                    ((FunDeclaration) decl).printMe(out, indent+1);
                 }
                 out.write('\n');
             }
