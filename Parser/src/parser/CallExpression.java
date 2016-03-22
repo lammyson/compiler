@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -35,6 +36,29 @@ public class CallExpression extends Expression {
      * @param indent 
      */
     public void printMe(FileWriter out, int indent) {
-        
+        try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
+            out.write("CallExpression " + id + '\n');
+            for (int i = 0; i < argList.size(); i++) {
+                Expression expr = argList.get(i);
+                if (expr instanceof AssignExpression) {
+                    ((AssignExpression) expr).printMe(out, indent+1);
+                } else if (expr instanceof BinaryExpression) {
+                    ((BinaryExpression) expr).printMe(out, indent+1);
+                } else if (expr instanceof CallExpression) {
+                    ((CallExpression) expr).printMe(out, indent+1);
+                } else if (expr instanceof NumExpression) {
+                    ((NumExpression) expr).printMe(out, indent+1);
+                } else if (expr instanceof VarExpression) {
+                    ((VarExpression) expr).printMe(out, indent+1);
+                }
+                out.write('\n');
+            }
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in CompoundStatement");
+        } 
     }
 }
