@@ -18,7 +18,7 @@ public class FunDeclaration extends Declaration {
     /**
      * This variable holds the identifier of the function. ie it's name.
      */
-    private String      identifier;
+    private String            identifier;
     
     /**
      * This variable holds the parameters that the function needs
@@ -34,7 +34,7 @@ public class FunDeclaration extends Declaration {
      * Constructor
      * @param ret
      * @param id
-     * @param paramList
+     * @param params
      * @param compound 
      */
     public FunDeclaration(int ret, String id, ArrayList<Param> params,
