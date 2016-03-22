@@ -32,8 +32,10 @@ public class CompoundStatement extends Statement {
     
     /**
      * This method will print the attributes of CompoundStatement
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }

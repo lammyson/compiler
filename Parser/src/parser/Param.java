@@ -33,8 +33,10 @@ public class Param {
     
     /**
      * This method will print the attributes of a param
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
+    public void printMe(FileWriter out, int indent) {
         
     }
 }
