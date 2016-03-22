@@ -32,11 +32,11 @@ public class Program {
             for (int i = 0; i < indent; i++) {
                 out.write("  ");
             }
-            out.write("Program");
+            out.write("Program\n");
             
             for (int i = 0; i < program.size(); i++) {
-                out.write('\n');
                 program.get(i).printMe(out, indent+1, program.get(i));
+                out.write('\n');
             }
         }
         catch (IOException e) {
