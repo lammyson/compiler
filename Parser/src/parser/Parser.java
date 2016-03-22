@@ -6,11 +6,13 @@
 
 package parser;
 
+import java.io.FileWriter;
+
 /**
  *
  * @author Andrew
  */
 public interface Parser {
     public void parse();
-    public void printTree();
+    public void printTree(FileWriter out);
 }

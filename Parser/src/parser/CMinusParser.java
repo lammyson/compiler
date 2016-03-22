@@ -1,12 +1,15 @@
 package parser;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import scanner.CMinusScanner;
 import scanner.Token;
 import scanner.Token.TokenType;
-
-NEED TO ADD throw new ParseError() to every method
 
 /**
  * This class will implement a C Minus Parser
@@ -597,6 +600,24 @@ public class CMinusParser implements Parser {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-    }
+        try {
+            // Initialize input file and scanner
+            File filename = new File(args[0]);
+            FileReader fReader = new FileReader(filename);
+            BufferedReader reader = new BufferedReader(fReader);
+            CMinusScanner cScan = new CMinusScanner(reader);
+            CMinusParser cParse = new CMinusParser(cScan);
+            cParse.parse();
+            FileWriter writer = new FileWriter(args[1], true);
+            cParse.printTree(writer);
+        }
+        catch (FileNotFoundException fnfe) {
+            fnfe.printStackTrace();
+            System.out.println("File not found");
+        }
+        catch (IOException ioe) {
+            ioe.printStackTrace();
+            System.out.println("Problem writing to file");
+        }
+    }   
 }
