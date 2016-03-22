@@ -13,3 +13,15 @@ program
   VarDecl x
   VarDecl y
   VarDecl z
+Program
+
+  VarDecl x
+  VarDecl y
+  VarDecl zProgram
+  VarDecl x
+  VarDecl y
+  VarDecl z
+Program
+  VarDecl x
+  VarDecl y
+  VarDecl z
