@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,7 @@ public class FunDeclaration extends Declaration {
     private ArrayList<Param>  paramList;
     
     /**
-     * This variable holds the function definition
+     * This variable holds the function definition. Can be null.
      */
     private CompoundStatement compoundStatement;
     
@@ -47,8 +48,30 @@ public class FunDeclaration extends Declaration {
     
     /**
      * This method will print the attributes of this class
+     * @param out
+     * @param indent
      */
-    public void printMe(FileWriter out) {
-        
+    public void printMe(FileWriter out, int indent) {
+        try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
+            out.write("  FunDecl ");
+            if (returnType == 0) {
+                out.write("void ");
+            } else if (returnType == 1) {
+                out.write("int ");
+            }
+            out.write(identifier + '\n');
+            for (int i = 0; i < paramList.size(); i++) {
+                paramList.get(i).printMe(out, indent+1);
+                out.write('\n');
+            }
+            compoundStatement.printMe(out, indent+1);
+            out.write('\n');
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in Program");
+        }
     }
 }
