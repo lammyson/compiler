@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * This class defines an Assign Expression in the C Minus language
@@ -34,6 +35,29 @@ public class AssignExpression extends Expression {
      * @param indent
      */
     public void printMe(FileWriter out, int indent) {
-        
+        try {
+            for (int i = 0; i < indent; i++) {
+                out.write("  ");
+            }
+            out.write("AssignExpression\n");
+            
+            var.printMe(out, indent+1);
+            
+            if (expression instanceof AssignExpression) {
+                ((AssignExpression) expression).printMe(out, indent + 1);
+            } else if (expression instanceof BinaryExpression) {
+                ((BinaryExpression) expression).printMe(out, indent + 1);
+            } else if (expression instanceof CallExpression) {
+                ((CallExpression) expression).printMe(out, indent + 1);
+            } else if (expression instanceof NumExpression) {
+                ((NumExpression) expression).printMe(out, indent + 1);
+            } else if (expression instanceof VarExpression) {
+                ((VarExpression) expression).printMe(out, indent + 1);
+            }
+            out.write('\n');
+        }
+        catch (IOException e) {
+            System.out.println("Error writing to file in CompoundStatement");
+        } 
     }
 }
