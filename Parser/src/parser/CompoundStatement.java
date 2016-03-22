@@ -47,12 +47,17 @@ public class CompoundStatement extends Statement {
                 out.write('\n');
             }
             for (int i = 0; i < statements.size(); i++) {
-                //statements.get(i).printMe(out, indent+1);
                 Statement stmt = statements.get(i);
                 if (stmt instanceof CompoundStatement) {
                     ((CompoundStatement) stmt).printMe(out, indent+1);
                 } else if (stmt instanceof ExpressionStatement) {
                     ((ExpressionStatement) stmt).printMe(out, indent+1);
+                } else if (stmt instanceof IterationStatement) {
+                    ((IterationStatement) stmt).printMe(out, indent+1);
+                } else if (stmt instanceof ReturnStatement) {
+                    ((ReturnStatement) stmt).printMe(out, indent+1);
+                } else if (stmt instanceof SelectionStatement) {
+                    ((SelectionStatement) stmt).printMe(out, indent+1);
                 }
                 out.write('\n');
             }
