@@ -134,15 +134,19 @@ public class CMinusParser implements Parser {
     private VarDeclaration parseVarDeclaration() {
         matchToken(TokenType.INT_TOKEN);
         String id = matchIDToken();
-        if (scan.viewNextToken().getTokenType() == TokenType.LSBRACK_TOKEN) {
+        TokenType type = scan.viewNextToken().getTokenType();
+        if (type == TokenType.LSBRACK_TOKEN) {
             matchToken(TokenType.LSBRACK_TOKEN);
             int num = matchNumToken();
             matchToken(TokenType.RSBRACK_TOKEN);
             matchToken(TokenType.SEMI_TOKEN);
             return new VarDeclaration(id, num);
-        } else {
+        } else if (type == TokenType.SEMI_TOKEN) {
             matchToken(TokenType.SEMI_TOKEN);
             return new VarDeclaration(id, -1);
+        } else {
+            throw new ParseError("Error in ParseVarDeclaration: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
         }
     }
     
@@ -249,7 +253,7 @@ public class CMinusParser implements Parser {
         } else if (type == TokenType.RET_TOKEN) {
             return parseReturnStmt();
         } else {
-            throw new ParseError("Error in parseStatment: unexpected token " 
+            throw new ParseError("Error in parseStatement: unexpected token " 
                     + scan.viewNextToken().getTokenType());
         }
     }
@@ -265,7 +269,7 @@ public class CMinusParser implements Parser {
             type == TokenType.LPAREN_TOKEN ||
             type == TokenType.ID_TOKEN) {
             expr = parseExpression();
-        }
+        } 
         matchToken(TokenType.SEMI_TOKEN);
         return new ExpressionStatement(expr);
     }
@@ -371,6 +375,9 @@ public class CMinusParser implements Parser {
             expr = parseSimpleExpression(call);
         } else if (checkFactorFollowSet(type)) {
             expr = parseSimpleExpression(new VarExpression(id, null));
+        } else {
+            throw new ParseError("Error in parseExpression1: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
         }
         return expr;
     }
@@ -389,6 +396,9 @@ public class CMinusParser implements Parser {
             expr = new AssignExpression(var, rhs);
         } else if (checkFactorFollowSet(type)) {
             expr = parseSimpleExpression(var);
+        } else {
+            throw new ParseError("Error in parseExpression2: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
         }
         return expr;
     }
@@ -482,6 +492,9 @@ public class CMinusParser implements Parser {
         } else if (type == TokenType.ID_TOKEN) {
             String id = matchIDToken();
             expr = parseVarCall(id);
+        } else {
+            throw new ParseError("Error in parseFactor: unexpected token " 
+                    + scan.viewNextToken().getTokenType());
         }
         return expr;
     }
