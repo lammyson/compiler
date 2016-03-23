@@ -1,0 +1,25 @@
+int global;
+
+void main(void) {
+    int a[5];
+    int avg;
+    int ans;
+
+    if (average > 100) {
+        ans = 1000000;
+    } else {
+        ans = 0;
+    } 
+}
+
+int drGIsCool;
+
+int average(int nums[]) {
+    int avg;
+    int i;
+
+    while(i!=5){avg=avg+nums[i];i=i+1;}
+
+    avg = avg/5;
+    return avg;
+}

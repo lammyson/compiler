@@ -42,10 +42,12 @@ public class CallExpression extends Expression {
             }
             out.write("CallExpression " + id + '\n');
             
-            for (int i = 0; i < argList.size(); i++) {
-                argList.get(i).printMe(out, indent+1, argList.get(i));
-                out.write('\n');
+            if (argList != null) {
+                for (int i = 0; i < argList.size(); i++) {
+                    argList.get(i).printMe(out, indent + 1, argList.get(i));
+                }
             }
+            
         }
         catch (IOException e) {
             System.out.println("Error writing to file in CallExpression");

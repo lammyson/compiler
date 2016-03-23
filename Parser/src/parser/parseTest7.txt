@@ -1,0 +1,10 @@
+int main(void) {
+	int i;
+	;
+	a = b + c - d;
+	a = b = c = d;
+	b = c * d + e / (a - b);
+	b = hello() + a[8];
+	call(a, b[3], 7, call());
+	return 0;	
+}

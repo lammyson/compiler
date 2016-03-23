@@ -44,8 +44,9 @@ public class VarDeclaration extends Declaration {
             out.write("VarDecl " + identifier);
             
             if (num > 0) {
-                out.write(" " + num);
+                out.write("[" + num + "]");
             }
+            out.write("\n");
         }
         catch (IOException e) {
             System.out.println("Error writing to file in VarDeclaration");

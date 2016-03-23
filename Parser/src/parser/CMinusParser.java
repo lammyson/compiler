@@ -185,6 +185,7 @@ public class CMinusParser implements Parser {
         TokenType type = scan.viewNextToken().getTokenType();
         matchToken(TokenType.INT_TOKEN);
         String id = matchIDToken();
+        type = scan.viewNextToken().getTokenType();
         if (type == TokenType.LSBRACK_TOKEN) {
             matchToken(TokenType.LSBRACK_TOKEN);
             matchToken(TokenType.RSBRACK_TOKEN);
@@ -518,7 +519,9 @@ public class CMinusParser implements Parser {
      */
     private ArrayList<Expression> parseArgs() {
         TokenType type = scan.viewNextToken().getTokenType();
-        if (type == TokenType.INT_TOKEN || type == TokenType.NUM_TOKEN) {
+        if (type == TokenType.ID_TOKEN || 
+            type == TokenType.NUM_TOKEN ||
+            type == TokenType.LPAREN_TOKEN) {
             return parseArgsList();
         } else if (type == TokenType.RPAREN_TOKEN) {
             return null;

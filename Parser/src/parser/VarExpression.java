@@ -43,7 +43,6 @@ public class VarExpression extends Expression {
             
             if (expression != null) {
                 expression.printMe(out, indent+1, expression);
-                out.write('\n');
             }
             
         }

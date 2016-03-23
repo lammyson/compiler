@@ -42,10 +42,8 @@ public class AssignExpression extends Expression {
             out.write("AssignExpression\n");
             
             var.printMe(out, indent+1);
-            out.write('\n');
             
             expression.printMe(out, indent+1, expression);
-            out.write('\n');
         }
         catch (IOException e) {
             System.out.println("Error writing to file in AssignExpression");

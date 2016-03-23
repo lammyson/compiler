@@ -35,10 +35,7 @@ public class ReturnStatement extends Statement {
 
             if (expression != null) {
                 expression.printMe(out, indent+1, expression);
-            } else {
-                out.write("No return expression");
             }
-            out.write('\n');
         }
         catch (IOException e) {
             System.out.println("Error writing to file in ReturnStatement");

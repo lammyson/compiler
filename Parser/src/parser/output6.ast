@@ -1,0 +1,81 @@
+Program
+  FunDecl int main
+    CompoundStatement
+      VarDecl i
+      SelectionStatement
+        BinaryExpression NOT_EQ_TOKEN
+          VarExpression i
+          NumExpression 0
+
+        CompoundStatement
+
+        CompoundStatement
+
+      SelectionStatement
+        BinaryExpression LESS_TOKEN
+          VarExpression i
+          NumExpression 0
+
+        CompoundStatement
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression i
+              NumExpression 4
+
+            CompoundStatement
+
+            CompoundStatement
+
+
+No else statement
+      SelectionStatement
+        BinaryExpression GREAT_TOKEN
+          VarExpression i
+          VarExpression id
+
+        SelectionStatement
+          BinaryExpression LESS_EQ_TOKEN
+            VarExpression i
+            VarExpression we
+
+          CompoundStatement
+
+          CompoundStatement
+
+
+No else statement
+      ReturnStatement
+        NumExpression 0
+Program
+  FunDecl int main
+    CompoundStatement
+      VarDecl i
+      SelectionStatement
+        BinaryExpression NOT_EQ_TOKEN
+          VarExpression i
+          NumExpression 0
+        CompoundStatement
+        CompoundStatement
+      SelectionStatement
+        BinaryExpression LESS_TOKEN
+          VarExpression i
+          NumExpression 0
+        CompoundStatement
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression i
+              NumExpression 4
+            CompoundStatement
+            CompoundStatement
+      SelectionStatement
+        BinaryExpression GREAT_TOKEN
+          VarExpression i
+          VarExpression id
+        SelectionStatement
+          BinaryExpression LESS_EQ_TOKEN
+            VarExpression i
+            VarExpression we
+          CompoundStatement
+          CompoundStatement
+      ReturnStatement
+        NumExpression 0

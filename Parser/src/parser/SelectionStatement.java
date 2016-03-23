@@ -50,17 +50,12 @@ public class SelectionStatement extends Statement {
             out.write("SelectionStatement" + '\n');
 
             expression.printMe(out, indent+1, expression);
-            out.write('\n');
             
             ifStatement.printMe(out, indent+1, ifStatement);
-            out.write('\n');
             
             if (elseStatement != null) {
                 elseStatement.printMe(out, indent+1, elseStatement);
-            } else {
-                out.write("No else statement");
-            }
-            out.write('\n');
+            } 
         }
         catch (IOException e) {
             System.out.println("Error writing to file in SelectionStatement");

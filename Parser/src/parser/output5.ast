@@ -1,0 +1,26 @@
+Program
+  FunDecl int main
+    CompoundStatement
+      VarDecl i
+      IterationStatement
+        BinaryExpression EQUAL_TOKEN
+          VarExpression i
+
+          NumExpression 0
+
+
+        CompoundStatement
+
+      ReturnStatement
+        NumExpression 0
+Program
+  FunDecl int main
+    CompoundStatement
+      VarDecl i
+      IterationStatement
+        BinaryExpression EQUAL_TOKEN
+          VarExpression i
+          NumExpression 0
+        CompoundStatement
+      ReturnStatement
+        NumExpression 0

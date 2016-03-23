@@ -43,10 +43,8 @@ public class IterationStatement extends Statement {
             out.write("IterationStatement" + '\n');
 
             expression.printMe(out, indent+1, expression);
-            out.write('\n');
             
             statement.printMe(out, indent+1, statement);
-            out.write('\n');
         }
         catch (IOException e) {
             System.out.println("Error writing to file in IterationStatement");

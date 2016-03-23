@@ -36,7 +36,6 @@ public class Program {
             
             for (int i = 0; i < program.size(); i++) {
                 program.get(i).printMe(out, indent+1, program.get(i));
-                out.write('\n');
             }
         }
         catch (IOException e) {

@@ -68,12 +68,10 @@ public class FunDeclaration extends Declaration {
             if (paramList != null) {
                 for (int i = 0; i < paramList.size(); i++) {
                     paramList.get(i).printMe(out, indent+1);
-                    out.write('\n');
                 }
             }
             
             compoundStatement.printMe(out, indent+1);
-            out.write('\n');
             
         }
         catch (IOException e) {

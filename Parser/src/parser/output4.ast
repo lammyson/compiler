@@ -1,0 +1,26 @@
+Program
+  FunDecl int main
+    CompoundStatement
+      ReturnStatement
+        NumExpression 0
+
+
+      ReturnStatement
+No return expression
+
+Program
+  FunDecl int main
+    CompoundStatement
+      VarDecl i
+      VarDecl j 6
+      ReturnStatement
+        NumExpression 0
+      ReturnStatement
+Program
+  FunDecl int main
+    CompoundStatement
+      VarDecl i
+      VarDecl j[6]
+      ReturnStatement
+        NumExpression 0
+      ReturnStatement

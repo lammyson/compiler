@@ -35,7 +35,6 @@ public class ExpressionStatement extends Statement {
             out.write("ExpressionStatement" + '\n');
             if (expression != null) {
                 expression.printMe(out, indent+1, expression);
-                out.write('\n');
             }
             
         }

@@ -1,0 +1,17 @@
+int main(void) {
+	int i;
+	if (i != 0) {
+	
+	} else {
+
+	}
+	if (i < 0) {
+		if (i >= 4) {
+		
+		} else {
+
+		}
+	}
+	if (i > id) if (i <= we) {} else {}
+	return 0;	
+}
