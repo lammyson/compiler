@@ -12,6 +12,6 @@ int main(void) {
 
 		}
 	}
-	if (i > id) if (i <= we) {} else {}
+	
 	return 0;	
 }
