@@ -270,6 +270,7 @@ public class CMinusParser implements Parser {
             type == TokenType.ID_TOKEN) {
             expr = parseExpression();
         } 
+        // Expression optional, so no error check
         matchToken(TokenType.SEMI_TOKEN);
         return new ExpressionStatement(expr);
     }
@@ -290,6 +291,7 @@ public class CMinusParser implements Parser {
             matchToken(TokenType.ELSE_TOKEN);
             elseStmt = parseStatement();
         }
+        // No check for error because else block is optional
         return new SelectionStatement(expr, ifStmt, elseStmt);
     }
     
@@ -319,6 +321,7 @@ public class CMinusParser implements Parser {
             type == TokenType.ID_TOKEN) {
             expr = parseExpression();
         } 
+        // Expression is optional, so no error check needed
         matchToken(TokenType.SEMI_TOKEN);
         return new ReturnStatement(expr);
     }
@@ -636,6 +639,8 @@ public class CMinusParser implements Parser {
     }
 
     /**
+     * Runs a parse on a CMinus file
+     * Outputs an abstract syntax tree to AST file
      * @param args the command line arguments
      */
     public static void main(String[] args) {
