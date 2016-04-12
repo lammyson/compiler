@@ -13,6 +13,6 @@ import java.io.FileWriter;
  * @author Andrew
  */
 public interface Parser {
-    public void parse();
+    public Program parse();
     public void printTree(FileWriter out);
 }

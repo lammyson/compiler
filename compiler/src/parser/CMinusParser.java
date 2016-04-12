@@ -43,9 +43,11 @@ public class CMinusParser implements Parser {
     
     /**
      * This method starts the parsing process
+     * @return 
      */
-    public void parse() {
+    public Program parse() {
         program = parseProgram();
+        return program;
     }
     
     /**
