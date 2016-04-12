@@ -3,7 +3,7 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import lowlevel.*;
 
 /**
  * This class is the root for an abstract syntax tree
@@ -41,5 +41,9 @@ public class Program {
         catch (IOException e) {
             System.out.println("Error writing to file in Program");
         }
+    }
+    
+    public CodeItem genLLCode() {
+        return new Data();
     }
 }
