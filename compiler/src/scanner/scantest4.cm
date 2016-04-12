@@ -1,0 +1,6 @@
+/* This test file will test all the special symbols */
+/* And some strange occurences */
+
++-*/<<=>>===!==;,()[]{}/***/
+
+<============>

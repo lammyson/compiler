@@ -1,0 +1,27 @@
+program
+  VarDecl x -1
+
+  VarDecl y -1
+
+  VarDecl z -1
+
+program
+  VarDecl x
+  VarDecl y
+  VarDecl z
+program
+  VarDecl x
+  VarDecl y
+  VarDecl z
+Program
+
+  VarDecl x
+  VarDecl y
+  VarDecl zProgram
+  VarDecl x
+  VarDecl y
+  VarDecl z
+Program
+  VarDecl x
+  VarDecl y
+  VarDecl z

@@ -1,0 +1,38 @@
+Program
+  VarDecl x
+  VarDecl y 10
+  VarDecl z
+  FunDecl int funOne
+    CompoundStatement
+
+
+  FunDecl void funTwo
+    Param a
+
+    Param b[]
+
+    CompoundStatement
+
+
+Program
+  VarDecl x
+  VarDecl y 10
+  VarDecl z
+  FunDecl int funOne
+    CompoundStatement
+  FunDecl void funTwo
+    Param a
+
+    Param b[]
+
+    CompoundStatement
+Program
+  VarDecl x
+  VarDecl y 10
+  VarDecl z
+  FunDecl int funOne
+    CompoundStatement
+  FunDecl void funTwo
+    Param a
+    Param b[]
+    CompoundStatement

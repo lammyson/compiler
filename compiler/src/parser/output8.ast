@@ -1,0 +1,63 @@
+Program
+  VarDecl global
+  FunDecl void main
+    CompoundStatement
+      VarDecl a[5]
+      VarDecl avg
+      VarDecl ans
+      SelectionStatement
+        BinaryExpression GREAT_TOKEN
+          VarExpression average
+          NumExpression 100
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression ans
+              NumExpression 1000000
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression ans
+              NumExpression 0
+      SelectionStatement
+        BinaryExpression GREAT_TOKEN
+          VarExpression i
+          VarExpression id
+        SelectionStatement
+          BinaryExpression LESS_EQ_TOKEN
+            VarExpression i
+            VarExpression we
+          CompoundStatement
+          CompoundStatement
+  VarDecl drGIsCool
+  FunDecl int average
+    Param nums[]
+    CompoundStatement
+      VarDecl avg
+      VarDecl i
+      IterationStatement
+        BinaryExpression NOT_EQ_TOKEN
+          VarExpression i
+          NumExpression 5
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression avg
+              BinaryExpression ADD_TOKEN
+                VarExpression avg
+                VarExpression nums
+                  VarExpression i
+          ExpressionStatement
+            AssignExpression
+              VarExpression i
+              BinaryExpression ADD_TOKEN
+                VarExpression i
+                NumExpression 1
+      ExpressionStatement
+        AssignExpression
+          VarExpression avg
+          BinaryExpression DIV_TOKEN
+            VarExpression avg
+            NumExpression 5
+      ReturnStatement
+        VarExpression avg

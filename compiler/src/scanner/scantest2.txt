@@ -1,0 +1,6 @@
+/* This is the second test file that will test this comment */
+
+int main(void) {
+
+    return 0;
+}
