@@ -1,5 +1,6 @@
 package compiler;
 
+import scanner.CMinusScanner;
 import x64codegen.X64AssemblyGenerator;
 import parser.*;
 import lowlevel.*;
@@ -29,10 +30,11 @@ public class CMinusCompiler implements Compiler {
 
         String fileName = filePrefix + ".c";
         try {
-            Parser myParser = new CMinusParser(fileName);
+            Parser myParser = new CMinusParser(  new CMinusScanner(
+                              new BufferedReader(new FileReader(fileName))));
 
             Program parseTree = myParser.parse();
-            myParser.printAST(parseTree);
+            myParser.printTree(new FileWriter(filePrefix + ".ast", true));
 
             CodeItem lowLevelCode = parseTree.genLLCode();
 
