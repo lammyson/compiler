@@ -3,6 +3,8 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import lowlevel.CodeItem;
+import lowlevel.Function;
 
 /**
  * This class defines a function declaration of the C Minus language
@@ -77,5 +79,11 @@ public class FunDeclaration extends Declaration {
         catch (IOException e) {
             System.out.println("Error writing to file in FunDeclaration");
         }
+    }
+    
+    public CodeItem genLLCode() {
+        Function func = new Function(returnType, identifier);
+        
+        return func;
     }
 }

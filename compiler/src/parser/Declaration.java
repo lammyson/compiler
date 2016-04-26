@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import lowlevel.CodeItem;
 
 /**
  * This class acts as a parent class for VarDeclaration and FunDeclaration
@@ -20,4 +21,7 @@ public abstract class Declaration {
             ((FunDeclaration) decl).printMe(out, indent);
         }
     }
+    
+    public abstract CodeItem genLLCode();
+    
 }

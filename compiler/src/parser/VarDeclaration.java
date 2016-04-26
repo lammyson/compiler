@@ -1,7 +1,10 @@
 package parser;
 
+import compiler.CMinusCompiler;
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.CodeItem;
+import lowlevel.Data;
 
 /**
  * This class defines a Var-Declaration in the C Minus language
@@ -51,5 +54,10 @@ public class VarDeclaration extends Declaration {
         catch (IOException e) {
             System.out.println("Error writing to file in VarDeclaration");
         }
+    }
+    
+    public CodeItem genLLCode() {
+        CMinusCompiler.globalHash.put(identifier, num);
+        return new Data(1, identifier);
     }
 }
