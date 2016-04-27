@@ -2,6 +2,7 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.FuncParam;
 
 /**
  * This class defines the params nonterminal in the C Minus language
@@ -52,5 +53,9 @@ public class Param {
         catch (IOException e) {
             System.out.println("Error writing to file in Param");
         }
+    }
+    
+    public FuncParam genLLCode() {
+        
     }
 }

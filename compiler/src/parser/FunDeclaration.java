@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import lowlevel.CodeItem;
+import lowlevel.FuncParam;
 import lowlevel.Function;
 
 /**
@@ -83,7 +84,15 @@ public class FunDeclaration extends Declaration {
     
     public CodeItem genLLCode() {
         Function func = new Function(returnType, identifier);
-        
+        FuncParam param = null;
+        for (int i = 0; i < paramList.size(); i++) {
+            
+            if (param == null) {
+                param = paramList.get(i).genLLCode();
+            } else {
+                param.setNextParam(paramList.get(i).genLLCode());
+            }
+        }
         return func;
     }
 }

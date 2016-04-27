@@ -13,7 +13,7 @@ import dataflow.*;
 
 public class CMinusCompiler implements Compiler {
 
-    public static HashMap globalHash = new HashMap();
+    public static HashMap<String, Integer> globalHash = new HashMap<String, Integer>();
     private static boolean genX64Code = false;
 
     public CMinusCompiler() {
