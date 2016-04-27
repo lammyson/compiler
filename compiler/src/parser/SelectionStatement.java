@@ -2,6 +2,7 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.Function;
 
 /**
  * This class defines a selection-stmt in the C Minus language
@@ -61,4 +62,8 @@ public class SelectionStatement extends Statement {
             System.out.println("Error writing to file in SelectionStatement");
         }
     } 
+    
+    public void genLLCode(Function func) {
+        
+    }
 }

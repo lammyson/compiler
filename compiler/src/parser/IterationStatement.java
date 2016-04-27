@@ -2,6 +2,7 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.Function;
 
 /**
  * This class defines an iteration-stmt of the C Minus language
@@ -49,5 +50,9 @@ public class IterationStatement extends Statement {
         catch (IOException e) {
             System.out.println("Error writing to file in IterationStatement");
         }
+    }
+    
+    public void genLLCode(Function func) {
+        
     }
 }
