@@ -55,7 +55,7 @@ public class ReturnStatement extends Statement {
         BasicBlock currBlock = func.getCurrBlock();
         BasicBlock returnBlock = func.getReturnBlock();
         if (expression != null) {
-            expression.genLLCode(currBlock);
+            expression.genLLCode(func);
             Operation newOper = 
                     new Operation(Operation.OperationType.RETURN, currBlock);
             Operand src = new Operand(Operand.OperandType.MACRO,"RetReg");
