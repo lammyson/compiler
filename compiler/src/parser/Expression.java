@@ -2,6 +2,7 @@ package parser;
 
 import java.io.FileWriter;
 import lowlevel.BasicBlock;
+import lowlevel.Function;
 
 /**
  * This acts as a parent class for:
@@ -35,7 +36,7 @@ public abstract class Expression {
     
     /**
      * Abstract method used for all expression classes
-     * @param currBlock 
+     * @param func 
      */
-    public abstract void genLLCode(BasicBlock currBlock);
+    public abstract void genLLCode(Function func);
 }
