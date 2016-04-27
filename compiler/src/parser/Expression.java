@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import lowlevel.BasicBlock;
 
 /**
  * This acts as a parent class for:
@@ -31,4 +32,10 @@ public abstract class Expression {
             ((VarExpression) expr).printMe(out, indent);
         }
     }
+    
+    /**
+     * Abstract method used for all expression classes
+     * @param currBlock 
+     */
+    public abstract void genLLCode(BasicBlock currBlock);
 }
