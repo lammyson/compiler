@@ -33,6 +33,23 @@ public class VarDeclaration extends Declaration {
         identifier = id;
         num        = n;
     }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+    
     
     /**
      * This will print out the attributes of this class

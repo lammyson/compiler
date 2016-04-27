@@ -105,7 +105,7 @@ public class FunDeclaration extends Declaration {
         BasicBlock cmpdStmt = new BasicBlock(func);
         func.setCurrBlock(cmpdStmt);
         func.appendBlock(cmpdStmt);
-        compoundStatement.genLLCode(func.getCurrBlock());
+        compoundStatement.genLLCode(func);
         func.appendBlock(func.genReturnBlock());
         func.appendBlock(func.getFirstUnconnectedBlock());
         return func;
