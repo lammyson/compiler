@@ -3,6 +3,7 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import lowlevel.BasicBlock;
 import lowlevel.CodeItem;
 import lowlevel.FuncParam;
 import lowlevel.Function;
@@ -82,17 +83,31 @@ public class FunDeclaration extends Declaration {
         }
     }
     
+    @Override
     public CodeItem genLLCode() {
         Function func = new Function(returnType, identifier);
-        FuncParam param = null;
-        for (int i = 0; i < paramList.size(); i++) {
-            
-            if (param == null) {
-                param = paramList.get(i).genLLCode();
+        FuncParam firstParam = null;
+        FuncParam lastParam = null;
+        FuncParam currentParam = null;
+        for (Param param : paramList) {
+            func.getTable().put(param.getIdentifier(), func.getNewRegNum());
+            currentParam = param.genLLCode();
+            if (firstParam == null) {
+                firstParam = currentParam;
+                lastParam = firstParam;
+                func.setFirstParam(firstParam);
             } else {
-                param.setNextParam(paramList.get(i).genLLCode());
+                lastParam.setNextParam(currentParam);
+                lastParam = currentParam;
             }
         }
+        func.createBlock0();
+        BasicBlock cmpdStmt = new BasicBlock(func);
+        func.setCurrBlock(cmpdStmt);
+        func.appendBlock(cmpdStmt);
+        compoundStatement.genLLCode(func.getCurrBlock());
+        func.appendBlock(func.genReturnBlock());
+        func.appendBlock(func.getFirstUnconnectedBlock());
         return func;
     }
 }

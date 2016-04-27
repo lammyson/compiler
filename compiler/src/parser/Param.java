@@ -32,6 +32,23 @@ public class Param {
         identifier = id;
         arrayType  = array;
     }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public boolean isArrayType() {
+        return arrayType;
+    }
+
+    public void setArrayType(boolean arrayType) {
+        this.arrayType = arrayType;
+    }
+    
     
     /**
      * This method will print the attributes of a param

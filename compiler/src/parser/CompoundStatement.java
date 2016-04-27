@@ -3,6 +3,7 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import lowlevel.BasicBlock;
 
 /**
  * This class defines a compound-stmt in the C Minus language
@@ -52,5 +53,9 @@ public class CompoundStatement extends Statement {
         catch (IOException e) {
             System.out.println("Error writing to file in CompoundStatement");
         }
+    }
+    
+    public void genLLCode(BasicBlock currBlock) {
+        
     }
 }

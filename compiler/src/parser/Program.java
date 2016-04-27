@@ -44,15 +44,19 @@ public class Program {
     }
     
     public CodeItem genLLCode() {
-        CodeItem item = null;
+        CodeItem firstItem = null;
+        CodeItem lastItem = null;
+        CodeItem nextItem = null;
         for (int i = 0; i < program.size(); i++) {
-            CodeItem nextItem = program.get(i).genLLCode();
-            if (item == null) {
-                item = nextItem;
+            nextItem = program.get(i).genLLCode();
+            if (firstItem == null) {
+                firstItem = nextItem;
+                lastItem = firstItem;
             } else {
-                item.setNextItem(nextItem);
+                lastItem.setNextItem(nextItem);
+                lastItem = nextItem;
             }
         }
-        return item;
+        return firstItem;
     }
 }

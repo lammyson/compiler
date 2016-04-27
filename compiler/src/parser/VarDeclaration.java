@@ -56,8 +56,9 @@ public class VarDeclaration extends Declaration {
         }
     }
     
+    @Override
     public CodeItem genLLCode() {
-        CMinusCompiler.globalHash.put(identifier, num);
+        CMinusCompiler.globalHash.put(identifier, identifier);
         return new Data(1, identifier);
     }
 }
