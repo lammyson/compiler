@@ -2,6 +2,7 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.Function;
 
 /**
  * This class defines an expression-stmt in the C Minus language
@@ -41,5 +42,13 @@ public class ExpressionStatement extends Statement {
         catch (IOException e) {
             System.out.println("Error writing to file in ExpressionStatement");
         }
+    }
+    
+    /**
+     * This method generates low level code for expression statements
+     * @param func 
+     */
+    public void genLLCode(Function func) {
+        expression.genLLCode(func);
     }
 }
