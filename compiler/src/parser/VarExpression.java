@@ -1,5 +1,6 @@
 package parser;
 
+import compiler.CMinusCompiler;
 import java.io.FileWriter;
 import java.io.IOException;
 import lowlevel.Function;
@@ -54,11 +55,13 @@ public class VarExpression extends Expression {
     }
     
     /**
-     * This method checks if the variable is found in the local symbol table
+     * This method checks if the variable is found in the either symbol table
+     * Throws LowLevelException if variable not found in symbol table
      * @param func 
      */
     public void genLLCode(Function func) {
-        if (!func.getTable().containsValue(identifier)) {
+        if (!func.getTable().containsValue(identifier) &&
+            !CMinusCompiler.globalHash.containsValue(identifier)) {
             throw new LowLevelException("Variable does not exist");
         }
     }
