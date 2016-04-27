@@ -4,7 +4,6 @@ import compiler.CMinusCompiler;
 import java.io.FileWriter;
 import java.io.IOException;
 import lowlevel.Function;
-import lowlevel.LowLevelException;
 
 /**
  * This class encapsulates variables in the C Minus language
@@ -62,7 +61,7 @@ public class VarExpression extends Expression {
     public void genLLCode(Function func) {
         if (!func.getTable().containsValue(identifier) &&
             !CMinusCompiler.globalHash.containsValue(identifier)) {
-            throw new LowLevelException("Variable does not exist");
+            throw new CodeGenerationException("Variable does not exist");
         }
     }
 }
