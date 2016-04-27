@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import lowlevel.BasicBlock;
+import lowlevel.Function;
 
 /**
  * This class defines a compound-stmt in the C Minus language
@@ -55,7 +56,12 @@ public class CompoundStatement extends Statement {
         }
     }
     
-    public void genLLCode(BasicBlock currBlock) {
-        
+    public void genLLCode(Function func) {
+        for (VarDeclaration var : varDeclarations) {
+            func.getTable().put(var.getIdentifier(), func.getNewRegNum());
+        }
+        for (Statement stmt : statements) {
+            stmt.genLLCode(func);
+        }
     }
 }
