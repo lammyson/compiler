@@ -2,6 +2,11 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operand.OperandType;
+import lowlevel.Operation;
+import lowlevel.Operation.OperationType;
 import scanner.Token.TokenType;
 
 /**
@@ -57,5 +62,62 @@ public class BinaryExpression extends Expression {
         catch (IOException e) {
             System.out.println("Error writing to file in BinaryExpression");
         }
+    }
+    
+    /**
+     * This method generates low level code for binary expressions
+     * @param func 
+     */
+    public void genLLCode(Function func) {
+        lhs.genLLCode(func);
+        Integer lhsRegNum = (Integer) func.getTable().get(lhs.getRegisterNum());
+        
+        rhs.genLLCode(func);
+        Integer rhsRegNum = (Integer) func.getTable().get(rhs.getRegisterNum());
+        
+        Integer newRegNum = func.getNewRegNum();
+        OperationType operType = null;
+        switch(operation) {
+            case ADD_TOKEN:
+                operType = OperationType.ADD_I;
+                break;
+            case SUB_TOKEN:
+                operType = OperationType.SUB_I;
+                break;
+            case MUL_TOKEN:
+                operType = OperationType.MUL_I;
+                break;
+            case DIV_TOKEN:
+                operType = OperationType.DIV_I;
+                break;
+            case LESS_TOKEN:
+                operType = OperationType.LT;
+                break;
+            case LESS_EQ_TOKEN:
+                operType = OperationType.LTE;
+                break;
+            case GREAT_TOKEN:
+                operType = OperationType.GT;
+                break;
+            case GREAT_EQ_TOKEN:
+                operType = OperationType.GTE;
+                break;
+            case EQUAL_TOKEN:
+                operType = OperationType.EQUAL;
+                break;
+            case NOT_EQ_TOKEN:
+                operType = OperationType.NOT_EQUAL;
+                break;
+            default:
+                throw new CodeGenerationException("Operation type not found");
+        }
+        Operation newOper = new Operation(operType, func.getCurrBlock());
+        Operand op1 = new Operand(OperandType.REGISTER, lhsRegNum);
+        Operand op2 = new Operand(OperandType.REGISTER, rhsRegNum);
+        Operand op3 = new Operand(OperandType.REGISTER, newRegNum);
+        newOper.setSrcOperand(0, op1);
+        newOper.setSrcOperand(1, op2);
+        newOper.setDestOperand(0, op3);
+        func.getCurrBlock().appendOper(newOper);
     }
 }
