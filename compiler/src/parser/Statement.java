@@ -1,6 +1,7 @@
 package parser;
 
 import java.io.FileWriter;
+import lowlevel.Function;
 
 /**
  * This acts as a parent class for:
@@ -31,4 +32,6 @@ public abstract class Statement {
             ((SelectionStatement) statement).printMe(out, indent);
         }
     }
+    
+    public abstract void genLLCode(Function func);
 }
