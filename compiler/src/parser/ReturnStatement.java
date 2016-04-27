@@ -47,7 +47,10 @@ public class ReturnStatement extends Statement {
         }
     }
     
-    
+    /**
+     * This method makes low level code for return statements
+     * @param func 
+     */
     public void genLLCode(Function func) {
         BasicBlock currBlock = func.getCurrBlock();
         BasicBlock returnBlock = func.getReturnBlock();
