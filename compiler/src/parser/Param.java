@@ -3,6 +3,7 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import lowlevel.FuncParam;
+import lowlevel.Data;
 
 /**
  * This class defines the params nonterminal in the C Minus language
@@ -72,7 +73,11 @@ public class Param {
         }
     }
     
+    /**
+     * This generates the low level code data structure for params
+     * @return 
+     */
     public FuncParam genLLCode() {
-        
+        return new FuncParam(Data.TYPE_INT, identifier, arrayType);
     }
 }
