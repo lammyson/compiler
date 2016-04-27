@@ -2,6 +2,8 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.Function;
+import lowlevel.LowLevelException;
 
 /**
  * This class encapsulates variables in the C Minus language
@@ -49,5 +51,15 @@ public class VarExpression extends Expression {
         catch (IOException e) {
             System.out.println("Error writing to file in VarExpression");
         } 
+    }
+    
+    /**
+     * This method checks if the variable is found in the local symbol table
+     * @param func 
+     */
+    public void genLLCode(Function func) {
+        if (!func.getTable().containsValue(identifier)) {
+            throw new LowLevelException("Variable does not exist");
+        }
     }
 }
