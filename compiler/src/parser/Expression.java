@@ -14,6 +14,18 @@ import lowlevel.Function;
  * @author Ryan
  */
 public abstract class Expression {
+    
+    private Integer registerNum;
+
+    public Integer getRegisterNum() {
+        return registerNum;
+    }
+
+    public void setRegisterNum(Integer registerNum) {
+        this.registerNum = registerNum;
+    }
+    
+    
     /**
      * Helper function for printMe on Expressions
      * @param out

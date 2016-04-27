@@ -30,6 +30,23 @@ public class VarExpression extends Expression {
         identifier = id;
         expression = expr;
     }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
+    public Expression getExpression() {
+        return expression;
+    }
+
+    public void setExpression(Expression expression) {
+        this.expression = expression;
+    }
+    
     
     /**
      * This method will print the attributes of VarExpression
