@@ -2,6 +2,8 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.Function;
+import lowlevel.LowLevelException;
 
 /**
  * This class is for the NUM terminal in the C Minus language
@@ -36,5 +38,13 @@ public class NumExpression extends Expression {
         catch (IOException e) {
             System.out.println("Error writing to file in NumExpression");
         }
+    }
+    
+    /**
+     * This method assigns a register to the num
+     * @param func 
+     */
+    public void genLLCode(Function func) {
+        func.getTable().put(num, func.getNewRegNum());
     }
 }
