@@ -33,9 +33,5 @@ public abstract class Statement {
         }
     }
     
-    /**
-     * This is an abstract method that all statements use
-     * @param func 
-     */
     public abstract void genLLCode(Function func);
 }
