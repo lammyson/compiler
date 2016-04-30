@@ -80,5 +80,6 @@ public class VarExpression extends Expression {
             !CMinusCompiler.globalHash.containsValue(identifier)) {
             throw new CodeGenerationException("Variable does not exist");
         }
+        maybe have to load if global and set to new register
     }
 }

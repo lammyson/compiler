@@ -70,10 +70,10 @@ public class BinaryExpression extends Expression {
      */
     public void genLLCode(Function func) {
         lhs.genLLCode(func);
-        Integer lhsRegNum = (Integer) func.getTable().get(lhs.getRegisterNum());
+        Integer lhsRegNum = lhs.getRegisterNum();
         
         rhs.genLLCode(func);
-        Integer rhsRegNum = (Integer) func.getTable().get(rhs.getRegisterNum());
+        Integer rhsRegNum = rhs.getRegisterNum();
         
         Integer newRegNum = func.getNewRegNum();
         OperationType operType = null;
@@ -118,6 +118,7 @@ public class BinaryExpression extends Expression {
         newOper.setSrcOperand(0, op1);
         newOper.setSrcOperand(1, op2);
         newOper.setDestOperand(0, op3);
+        this.setRegisterNum(newRegNum);
         func.getCurrBlock().appendOper(newOper);
     }
 }

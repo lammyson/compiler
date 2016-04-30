@@ -45,6 +45,8 @@ public class NumExpression extends Expression {
      * @param func 
      */
     public void genLLCode(Function func) {
-        func.getTable().put(num, func.getNewRegNum());
+        do we have to add assign oper to set register to num?
+        Integer regNum = func.getNewRegNum();
+        this.setRegisterNum(regNum);
     }
 }
