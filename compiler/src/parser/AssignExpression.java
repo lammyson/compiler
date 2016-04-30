@@ -1,5 +1,6 @@
 package parser;
 
+import compiler.CMinusCompiler;
 import java.io.FileWriter;
 import java.io.IOException;
 import lowlevel.Function;
@@ -58,13 +59,28 @@ public class AssignExpression extends Expression {
         // Simply checks if var is contained in symbol table
         var.genLLCode(func);
         expression.genLLCode(func);
-        Integer varRegNum = (Integer) func.getTable().get(var.getIdentifier());
+        Integer varRegNum;
+        boolean isGlobal = false;
+        if (func.getTable().containsKey(var.getIdentifier())) {
+            varRegNum = func.getTable().get(var.getIdentifier());
+        } else {
+            // Store value in new register to be stored later
+            varRegNum = func.getNewRegNum();
+            isGlobal = true;
+        }
         Integer exprRegNum = expression.getRegisterNum();
-        Operation oper = new Operation(Operation.OperationType.ASSIGN, func.getCurrBlock());
-        Operand lhs = new Operand(Operand.OperandType.REGISTER, varRegNum);
+        Operation oper;
+        if (!isGlobal) {
+            oper = new Operation(Operation.OperationType.ASSIGN, func.getCurrBlock());
+            Operand lhs = new Operand(Operand.OperandType.REGISTER, varRegNum);
+            oper.setDestOperand(0, lhs);
+        } else {
+            oper = new Operation(Operation.OperationType.STORE_I, func.getCurrBlock());
+            Operand lhs = new Operand(Operand.OperandType.STRING, var.getIdentifier());
+            oper.setDestOperand(0, lhs);
+        }
         Operand rhs = new Operand(Operand.OperandType.REGISTER, exprRegNum);
         oper.setSrcOperand(0, rhs);
-        oper.setDestOperand(0, lhs);
         func.getCurrBlock().appendOper(oper);
     }
 }
