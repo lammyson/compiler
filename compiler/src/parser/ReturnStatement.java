@@ -58,12 +58,14 @@ public class ReturnStatement extends Statement {
             expression.genLLCode(func);
             Operation newOper = 
                     new Operation(Operation.OperationType.RETURN, currBlock);
-            Operand src = new Operand(Operand.OperandType.MACRO,"RetReg");
+            Operand dest = new Operand(Operand.OperandType.MACRO,"RetReg");
+            Operand src = new Operand(Operand.OperandType.REGISTER, expression.getRegisterNum());
             newOper.setSrcOperand(0, src);
+            newOper.setDestOperand(0, dest);
             currBlock.appendOper(newOper);
         }
         Operation newOper = new Operation(OperationType.JMP, currBlock);
-        Operand src = new Operand(Operand.OperandType.BLOCK, returnBlock);
+        Operand src = new Operand(Operand.OperandType.BLOCK, returnBlock.getBlockNum());
         newOper.setSrcOperand(0, src);
         currBlock.appendOper(newOper);
     }

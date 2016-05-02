@@ -89,6 +89,7 @@ public class FunDeclaration extends Declaration {
         FuncParam firstParam = null;
         FuncParam lastParam = null;
         FuncParam currentParam = null;
+        BasicBlock ret = func.genReturnBlock();
         if (paramList != null && !paramList.isEmpty()) {
             for (Param param : paramList) {
                 func.getTable().put(param.getIdentifier(), func.getNewRegNum());
@@ -108,7 +109,7 @@ public class FunDeclaration extends Declaration {
         func.setCurrBlock(cmpdStmt);
         func.appendBlock(cmpdStmt);
         compoundStatement.genLLCode(func);
-        func.appendBlock(func.genReturnBlock());
+        func.appendBlock(ret);
         if (func.getFirstUnconnectedBlock() != null) {
             func.appendBlock(func.getFirstUnconnectedBlock());
         }
