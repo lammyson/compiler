@@ -13,6 +13,8 @@ int main(void) {
 	
 	if (a == 0) {
 		a = 1;
+	} else {
+		b = 5;
 	}
 	
 	return 0;

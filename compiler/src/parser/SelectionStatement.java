@@ -115,7 +115,7 @@ public class SelectionStatement extends Statement {
                     lastOper.getType() != Operation.OperationType.JMP) {
                 
                 Operation jmpOper = new Operation(Operation.OperationType.JMP, func.getCurrBlock());
-                Operand src = new Operand(Operand.OperandType.BLOCK, elseBlock.getBlockNum());
+                Operand src = new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum());
                 jmpOper.setSrcOperand(0, src);
                 func.getCurrBlock().appendOper(jmpOper);
             }
