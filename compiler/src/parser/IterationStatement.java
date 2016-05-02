@@ -80,8 +80,12 @@ public class IterationStatement extends Statement {
         //genLLCode body block
         statement.genLLCode(func);
         
+        //Reevaluate condition
+        expression.genLLCode(func);
+        
         //Add jump operation if condition is still true
         branch = new Operation(Operation.OperationType.BNE, bodyBlock);
+        src1 = new Operand(Operand.OperandType.REGISTER, expression.getRegisterNum());
         branch.setSrcOperand(0, src1);
         branch.setSrcOperand(1, src2);
         branch.setDestOperand(0, new Operand(Operand.OperandType.BLOCK, bodyBlock.getBlockNum()));
