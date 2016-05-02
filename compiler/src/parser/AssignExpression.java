@@ -68,6 +68,7 @@ public class AssignExpression extends Expression {
         } else {
             varRegNum = func.getTable().get(var.getIdentifier());
         }
+        this.setRegisterNum(varRegNum);
         Integer exprRegNum = expression.getRegisterNum();
         Operation oper;
         if (!isGlobal) {
