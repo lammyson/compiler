@@ -44,8 +44,7 @@ public class CMinusCompiler implements Compiler {
             lowLevelCode.printLLCode(outFile);
             outFile.close();
 
-            // Was 2
-            int optiLevel = 0;
+            int optiLevel = 2;
             LowLevelCodeOptimizer lowLevelOpti =
                     new LowLevelCodeOptimizer(lowLevelCode, optiLevel);
             lowLevelOpti.optimize();
