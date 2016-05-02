@@ -10,5 +10,10 @@ int main(void) {
 	b = a + 1;
 	a = b - a / a * 3 + 4;
 	b = foo();
+	
+	if (a == 0) {
+		a = 1;
+	}
+	
 	return 0;
 }
