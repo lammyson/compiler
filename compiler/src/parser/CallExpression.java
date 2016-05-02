@@ -3,6 +3,7 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import lowlevel.Attribute;
 import lowlevel.Function;
 import lowlevel.Operand;
 import lowlevel.Operation;
@@ -59,23 +60,14 @@ public class CallExpression extends Expression {
     
     @Override
     public void genLLCode(Function func) {
+        Operation callOper = new Operation(Operation.OperationType.CALL, func.getCurrBlock());
         if (argList != null && !argList.isEmpty()) {
             parseParams(func, 0);
+            callOper.addAttribute(new Attribute("numParams", Integer.toString(argList.size())));
+        } else {
+            callOper.addAttribute(new Attribute("numParams", Integer.toString(0)));
         }
-        
-    }
-    
-    private void parseParams(Function func, int paramNum) {
-        if (argList.size() > paramNum) {
-            Expression param = argList.get(paramNum);
-            param.genLLCode(func);
-            parseParams(func, paramNum++);
-            Operation oper = new Operation(Operation.OperationType.PASS, func.getCurrBlock());
-            Operand src = new Operand(Operand.OperandType.REGISTER, param.getRegisterNum());
-            oper.setSrcOperand(0, src);
-            func.getCurrBlock().appendOper(oper);
-        }
-        Operation callOper = new Operation(Operation.OperationType.CALL, func.getCurrBlock());
+      
         Operand src = new Operand(Operand.OperandType.STRING, id);
         callOper.setSrcOperand(0, src);
         func.getCurrBlock().appendOper(callOper);
@@ -88,5 +80,18 @@ public class CallExpression extends Expression {
         retOper.setDestOperand(0, retDest);
         func.getCurrBlock().appendOper(retOper);
         this.setRegisterNum(retRegNum);
+    }
+    
+    private void parseParams(Function func, int paramNum) {
+        if (argList.size() > paramNum) {
+            Expression param = argList.get(paramNum);
+            param.genLLCode(func);
+            parseParams(func, paramNum++);
+            Operation oper = new Operation(Operation.OperationType.PASS, func.getCurrBlock());
+            oper.addAttribute(new Attribute("PARAM_NUM", Integer.toString(paramNum + 1)));
+            Operand src = new Operand(Operand.OperandType.REGISTER, param.getRegisterNum());
+            oper.setSrcOperand(0, src);
+            func.getCurrBlock().appendOper(oper);
+        }
     }
 }
