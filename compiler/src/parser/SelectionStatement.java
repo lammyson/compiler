@@ -111,16 +111,22 @@ public class SelectionStatement extends Statement {
             
             //Add jump to else block if else doesn't end in return
             Operation lastOper = func.getCurrBlock().getLastOper();
-            if (lastOper != null &&
-                    lastOper.getType() != Operation.OperationType.RETURN && 
-                    lastOper.getType() != Operation.OperationType.JMP) {
+            if (lastOper != null) {
+                    if (lastOper.getType() != Operation.OperationType.RETURN && 
+                            lastOper.getType() != Operation.OperationType.JMP) {
                 
+                        Operation jmpOper = new Operation(Operation.OperationType.JMP, func.getCurrBlock());
+                        Operand src = new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum());
+                        jmpOper.setSrcOperand(0, src);
+                        func.getCurrBlock().appendOper(jmpOper);
+                    }
+            } else {
                 Operation jmpOper = new Operation(Operation.OperationType.JMP, func.getCurrBlock());
                 Operand src = new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum());
                 jmpOper.setSrcOperand(0, src);
                 func.getCurrBlock().appendOper(jmpOper);
             }
-            
+
             //Append else block
             func.appendUnconnectedBlock(elseBlock);
         }

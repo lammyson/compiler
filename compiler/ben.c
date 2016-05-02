@@ -10,8 +10,8 @@ void test(void){
   else{
     b = 2;
     while( b == 2){
-      b = 2;
-      if(b == 2){
+      b = 3;
+      if(b == 3){
         b = b + 1;
       }
       else{
