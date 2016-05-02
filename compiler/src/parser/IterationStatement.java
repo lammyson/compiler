@@ -2,7 +2,10 @@ package parser;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import lowlevel.BasicBlock;
 import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operation;
 
 /**
  * This class defines an iteration-stmt of the C Minus language
@@ -53,6 +56,41 @@ public class IterationStatement extends Statement {
     }
     
     public void genLLCode(Function func) {
+        //Create blocks needed
+        BasicBlock condBlock = func.getCurrBlock();
+        BasicBlock bodyBlock = new BasicBlock(func);
+        BasicBlock postBlock = new BasicBlock(func);
         
+        //Gen branch operation
+        expression.genLLCode(func);
+        Operation branch = new Operation(Operation.OperationType.BEQ, condBlock);
+        Operand src1 = new Operand(Operand.OperandType.REGISTER, expression.getRegisterNum());
+        Operand src2 = new Operand(Operand.OperandType.INTEGER, 0);
+        branch.setSrcOperand(0, src1);
+        branch.setSrcOperand(1, src2);
+        branch.setDestOperand(0, new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum()));
+        func.getCurrBlock().appendOper(branch);
+        
+        //Append body block
+        func.appendToCurrentBlock(bodyBlock);
+        
+        //Set current block to body block
+        func.setCurrBlock(bodyBlock);
+        
+        //genLLCode body block
+        statement.genLLCode(func);
+        
+        //Add jump operation if condition is still true
+        branch = new Operation(Operation.OperationType.BNE, bodyBlock);
+        branch.setSrcOperand(0, src1);
+        branch.setSrcOperand(1, src2);
+        branch.setDestOperand(0, new Operand(Operand.OperandType.BLOCK, bodyBlock.getBlockNum()));
+        func.getCurrBlock().appendOper(branch);
+        
+        //Append post block
+        func.appendToCurrentBlock(postBlock);
+        
+        //Set current block to post block
+        func.setCurrBlock(postBlock);
     }
 }

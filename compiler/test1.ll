@@ -43,9 +43,22 @@
     (OPER 26 Store [(s a)]  [(r 17)])
   )
   (BB 6
-    (OPER 30 Mov [(r 20)]  [(i 0)])
-    (OPER 31 Return [(m RetReg)]  [(r 20)])
-    (OPER 32 Jmp []  [(bb 2)])
+    (OPER 30 Mov [(r 20)]  [(i 1)])
+    (OPER 31 GT [(r 21)]  [(r 1)(r 20)])
+    (OPER 32 BEQ [(bb 9)]  [(r 21)(i 0)])
+  )
+  (BB 8
+    (OPER 33 Mov [(r 22)]  [(i 1)])
+    (OPER 34 Sub_I [(r 23)]  [(r 1)(r 22)])
+    (OPER 35 Mov [(r 1)]  [(r 23)])
+    (OPER 36 BNE [(bb 8)]  [(r 21)(i 0)])
+  )
+  (BB 9
+    (OPER 37 Mov [(r 24)]  [(i 10)])
+    (OPER 38 Mov [(r 1)]  [(r 24)])
+    (OPER 39 Mov [(r 25)]  [(i 0)])
+    (OPER 40 Return [(m RetReg)]  [(r 25)])
+    (OPER 41 Jmp []  [(bb 2)])
   )
   (BB 2
     (OPER 3 Func_Exit []  [])

@@ -17,5 +17,11 @@ int main(void) {
 		b = 5;
 	}
 	
+	while (b > 1) {		
+		b = b - 1;
+	}
+	
+	b = 10;
+	
 	return 0;
 }
