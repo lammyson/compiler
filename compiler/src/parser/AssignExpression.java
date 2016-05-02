@@ -61,12 +61,12 @@ public class AssignExpression extends Expression {
         expression.genLLCode(func);
         Integer varRegNum;
         boolean isGlobal = false;
-        if (func.getTable().containsKey(var.getIdentifier())) {
-            varRegNum = func.getTable().get(var.getIdentifier());
-        } else {
+        if (CMinusCompiler.globalHash.containsKey(var.getIdentifier())) {
             // Store value in new register to be stored later
             varRegNum = func.getNewRegNum();
             isGlobal = true;
+        } else {
+            varRegNum = func.getTable().get(var.getIdentifier());
         }
         Integer exprRegNum = expression.getRegisterNum();
         Operation oper;

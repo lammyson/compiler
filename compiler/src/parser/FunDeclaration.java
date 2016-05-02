@@ -89,16 +89,18 @@ public class FunDeclaration extends Declaration {
         FuncParam firstParam = null;
         FuncParam lastParam = null;
         FuncParam currentParam = null;
-        for (Param param : paramList) {
-            func.getTable().put(param.getIdentifier(), func.getNewRegNum());
-            currentParam = param.genLLCode();
-            if (firstParam == null) {
-                firstParam = currentParam;
-                lastParam = firstParam;
-                func.setFirstParam(firstParam);
-            } else {
-                lastParam.setNextParam(currentParam);
-                lastParam = currentParam;
+        if (paramList != null && !paramList.isEmpty()) {
+            for (Param param : paramList) {
+                func.getTable().put(param.getIdentifier(), func.getNewRegNum());
+                currentParam = param.genLLCode();
+                if (firstParam == null) {
+                    firstParam = currentParam;
+                    lastParam = firstParam;
+                    func.setFirstParam(firstParam);
+                } else {
+                    lastParam.setNextParam(currentParam);
+                    lastParam = currentParam;
+                }
             }
         }
         func.createBlock0();

@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import lowlevel.Function;
 import lowlevel.LowLevelException;
+import lowlevel.Operand;
+import lowlevel.Operation;
 
 /**
  * This class is for the NUM terminal in the C Minus language
@@ -44,9 +46,15 @@ public class NumExpression extends Expression {
      * This method assigns a register to the num
      * @param func 
      */
+    @Override
     public void genLLCode(Function func) {
-        do we have to add assign oper to set register to num?
-        Integer regNum = func.getNewRegNum();
-        this.setRegisterNum(regNum);
+        Operation oper = new Operation(Operation.OperationType.ASSIGN, func.getCurrBlock());
+        Integer newRegNum = func.getNewRegNum();
+        Operand reg = new Operand(Operand.OperandType.REGISTER, newRegNum);
+        Operand var = new Operand(Operand.OperandType.INTEGER, num);
+        oper.setSrcOperand(0, var);
+        oper.setDestOperand(0, reg);
+        func.getCurrBlock().appendOper(oper);
+        this.setRegisterNum(newRegNum);
     }
 }

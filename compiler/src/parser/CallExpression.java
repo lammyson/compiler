@@ -3,6 +3,7 @@ package parser;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import lowlevel.Function;
 
 /**
  * This class defines the call part of a var call which is a function call
@@ -52,5 +53,10 @@ public class CallExpression extends Expression {
         catch (IOException e) {
             System.out.println("Error writing to file in CallExpression");
         } 
+    }
+    
+    @Override
+    public void genLLCode(Function func) {
+        
     }
 }

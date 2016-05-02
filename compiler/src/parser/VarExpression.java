@@ -4,6 +4,8 @@ import compiler.CMinusCompiler;
 import java.io.FileWriter;
 import java.io.IOException;
 import lowlevel.Function;
+import lowlevel.Operand;
+import lowlevel.Operation;
 
 /**
  * This class encapsulates variables in the C Minus language
@@ -75,11 +77,24 @@ public class VarExpression extends Expression {
      * Throws LowLevelException if variable not found in symbol table
      * @param func 
      */
+    @Override
     public void genLLCode(Function func) {
-        if (!func.getTable().containsValue(identifier) &&
-            !CMinusCompiler.globalHash.containsValue(identifier)) {
+        
+        if (func.getTable().containsKey(identifier)) {
+            this.setRegisterNum(func.getTable().get(identifier));
+        } else if (CMinusCompiler.globalHash.containsKey(identifier)) {
+            Operation oper = new Operation(Operation.OperationType.LOAD_I, func.getCurrBlock());
+            Integer newRegNum = func.getNewRegNum();
+            Operand reg = new Operand(Operand.OperandType.REGISTER, newRegNum);
+            Operand var = new Operand(Operand.OperandType.STRING, identifier);
+            oper.setSrcOperand(0, var);
+            oper.setDestOperand(0, reg);
+            func.getCurrBlock().appendOper(oper);
+            this.setRegisterNum(newRegNum);
+            func.getTable().put(identifier, newRegNum);
+        } else {
             throw new CodeGenerationException("Variable does not exist");
         }
-        maybe have to load if global and set to new register
+        
     }
 }

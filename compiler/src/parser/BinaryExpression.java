@@ -68,6 +68,7 @@ public class BinaryExpression extends Expression {
      * This method generates low level code for binary expressions
      * @param func 
      */
+    @Override
     public void genLLCode(Function func) {
         lhs.genLLCode(func);
         Integer lhsRegNum = lhs.getRegisterNum();
