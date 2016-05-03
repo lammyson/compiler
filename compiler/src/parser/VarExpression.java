@@ -87,7 +87,9 @@ public class VarExpression extends Expression {
             Integer newRegNum = func.getNewRegNum();
             Operand reg = new Operand(Operand.OperandType.REGISTER, newRegNum);
             Operand var = new Operand(Operand.OperandType.STRING, identifier);
+            Operand offset = new Operand(Operand.OperandType.INTEGER, 0);
             oper.setSrcOperand(0, var);
+            oper.setSrcOperand(1, offset);
             oper.setDestOperand(0, reg);
             func.getCurrBlock().appendOper(oper);
             this.setRegisterNum(newRegNum);

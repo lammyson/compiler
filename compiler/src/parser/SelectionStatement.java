@@ -83,9 +83,9 @@ public class SelectionStatement extends Statement {
         //Do this if else part exists
         if (elseStatement != null) {
             elseBlock = new BasicBlock(func);
-            branch.setDestOperand(0, new Operand(Operand.OperandType.BLOCK, elseBlock.getBlockNum()));
+            branch.setSrcOperand(2, new Operand(Operand.OperandType.BLOCK, elseBlock.getBlockNum()));
         } else {
-            branch.setDestOperand(0, new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum()));
+            branch.setSrcOperand(2, new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum()));
         }
         func.getCurrBlock().appendOper(branch);
 

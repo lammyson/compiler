@@ -61,27 +61,33 @@ public class AssignExpression extends Expression {
         expression.genLLCode(func);
         Integer varRegNum;
         boolean isGlobal = false;
-        if (CMinusCompiler.globalHash.containsKey(var.getIdentifier())) {
+        if (func.getTable().containsKey(var.getIdentifier())) {
+            varRegNum = func.getTable().get(var.getIdentifier());            
+        } else {
             // Store value in new register to be stored later
             varRegNum = func.getNewRegNum();
+        }
+        if (CMinusCompiler.globalHash.containsKey(var.getIdentifier())) {
             isGlobal = true;
-        } else {
-            varRegNum = func.getTable().get(var.getIdentifier());
         }
         this.setRegisterNum(varRegNum);
         Integer exprRegNum = expression.getRegisterNum();
-        Operation oper;
-        if (!isGlobal) {
-            oper = new Operation(Operation.OperationType.ASSIGN, func.getCurrBlock());
-            Operand lhs = new Operand(Operand.OperandType.REGISTER, varRegNum);
-            oper.setDestOperand(0, lhs);
-        } else {
-            oper = new Operation(Operation.OperationType.STORE_I, func.getCurrBlock());
-            Operand lhs = new Operand(Operand.OperandType.STRING, var.getIdentifier());
-            oper.setDestOperand(0, lhs);
-        }
+        Operation assignOper = new Operation(Operation.OperationType.ASSIGN, func.getCurrBlock());
+        Operand lhs = new Operand(Operand.OperandType.REGISTER, varRegNum);
+        assignOper.setDestOperand(0, lhs);
         Operand rhs = new Operand(Operand.OperandType.REGISTER, exprRegNum);
-        oper.setSrcOperand(0, rhs);
-        func.getCurrBlock().appendOper(oper);
+        assignOper.setSrcOperand(0, rhs);
+        func.getCurrBlock().appendOper(assignOper);
+        if (isGlobal) {
+            Operation storeOper = new Operation(Operation.OperationType.STORE_I, func.getCurrBlock());
+            Operand storeReg = new Operand(Operand.OperandType.REGISTER, exprRegNum);
+            storeOper.setSrcOperand(0, storeReg);
+            Operand storeString = new Operand(Operand.OperandType.STRING, var.getIdentifier());
+            storeOper.setSrcOperand(1, storeString);
+            Operand offset = new Operand(Operand.OperandType.INTEGER, 0);
+            storeOper.setSrcOperand(2, offset);
+            func.getCurrBlock().appendOper(storeOper);
+        }
+        
     }
 }

@@ -68,7 +68,7 @@ public class IterationStatement extends Statement {
         Operand src2 = new Operand(Operand.OperandType.INTEGER, 0);
         branch.setSrcOperand(0, src1);
         branch.setSrcOperand(1, src2);
-        branch.setDestOperand(0, new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum()));
+        branch.setSrcOperand(2, new Operand(Operand.OperandType.BLOCK, postBlock.getBlockNum()));
         func.getCurrBlock().appendOper(branch);
         
         //Append body block
@@ -88,7 +88,7 @@ public class IterationStatement extends Statement {
         src1 = new Operand(Operand.OperandType.REGISTER, expression.getRegisterNum());
         branch.setSrcOperand(0, src1);
         branch.setSrcOperand(1, src2);
-        branch.setDestOperand(0, new Operand(Operand.OperandType.BLOCK, bodyBlock.getBlockNum()));
+        branch.setSrcOperand(2, new Operand(Operand.OperandType.BLOCK, bodyBlock.getBlockNum()));
         func.getCurrBlock().appendOper(branch);
         
         //Append post block
