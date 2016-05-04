@@ -61,11 +61,7 @@ public class ReturnStatement extends Statement {
             Operand retDest = new Operand(Operand.OperandType.MACRO, "RetReg");
             setReturn.setSrcOperand(0, retSrc);
             setReturn.setDestOperand(0, retDest);
-            Operation newOper = 
-                    new Operation(Operation.OperationType.RETURN, currBlock);
-            Operand src = new Operand(Operand.OperandType.MACRO,"RetReg");
-            newOper.setSrcOperand(0, src);
-            currBlock.appendOper(newOper);
+            currBlock.appendOper(setReturn);
         }
         Operation newOper = new Operation(OperationType.JMP, currBlock);
         Operand src = new Operand(Operand.OperandType.BLOCK, returnBlock.getBlockNum());

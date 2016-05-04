@@ -7,7 +7,6 @@
     (OPER 6 Add_I [(r 4)]  [(r 1)(r 2)])
     (OPER 7 Mov [(r 3)]  [(r 4)])
     (OPER 8 Mov [(m RetReg)]  [(r 3)])
-    (OPER 9 Jmp []  [(bb 2)])
   )
   (BB 2
     (OPER 3 Func_Exit []  [])
@@ -50,9 +49,6 @@
     (OPER 17 Pass []  [(r 9)])
     (OPER 15 JSR []  [(s putDigit)])
     (OPER 18 Mov [(r 10)]  [(m RetReg)])
-    (OPER 19 Jmp []  [(bb 2)])
-  )
-  (BB 6
   )
   (BB 2
     (OPER 3 Func_Exit []  [])
@@ -61,7 +57,7 @@
   (BB 12
     (OPER 50 Mov [(r 29)]  [(i 1)])
     (OPER 51 EQ [(r 30)]  [(r 3)(r 29)])
-    (OPER 52 BEQ []  [(r 30)(i 0)(bb 14)])
+    (OPER 52 BEQ []  [(r 30)(i 0)(bb 11)])
   )
   (BB 13
     (OPER 54 Mov [(r 31)]  [(i 0)])
@@ -75,7 +71,7 @@
   (BB 17
     (OPER 71 Mov [(r 41)]  [(i 1)])
     (OPER 72 EQ [(r 42)]  [(r 3)(r 41)])
-    (OPER 73 BEQ []  [(r 42)(i 0)(bb 19)])
+    (OPER 73 BEQ []  [(r 42)(i 0)(bb 16)])
   )
   (BB 18
     (OPER 75 Mov [(r 43)]  [(i 0)])
@@ -145,7 +141,7 @@
     (OPER 80 Pass []  [(r 1)])
     (OPER 79 JSR []  [(s putDigit)])
     (OPER 81 Mov [(r 45)]  [(m RetReg)])
-    (OPER 82 Jmp []  [(bb 6)])
+    (OPER 82 Jmp []  [(bb 2)])
   )
 )
 (FUNCTION  main  []
@@ -303,8 +299,6 @@
     (OPER 140 Mov [(r 81)]  [(i 1)])
     (OPER 141 Mov [(r 5)]  [(r 81)])
   )
-  (BB 16
-  )
   (BB 13
     (OPER 160 Mov [(r 90)]  [(i 10)])
     (OPER 161 EQ [(r 91)]  [(r 5)(r 90)])
@@ -335,7 +329,6 @@
     (OPER 202 Mov [(r 110)]  [(m RetReg)])
     (OPER 203 Mov [(r 111)]  [(i 0)])
     (OPER 204 Mov [(m RetReg)]  [(r 111)])
-    (OPER 205 Jmp []  [(bb 2)])
   )
   (BB 2
     (OPER 3 Func_Exit []  [])
@@ -349,7 +342,7 @@
   (BB 23
     (OPER 152 Mov [(r 88)]  [(i 3)])
     (OPER 153 Mov [(r 5)]  [(r 88)])
-    (OPER 154 Jmp []  [(bb 22)])
+    (OPER 154 Jmp []  [(bb 13)])
   )
   (BB 20
     (OPER 147 Mov [(r 85)]  [(i 0)])
@@ -361,7 +354,7 @@
     (OPER 151 Mov [(r 5)]  [(r 87)])
   )
   (BB 22
-    (OPER 155 Jmp []  [(bb 19)])
+    (OPER 155 Jmp []  [(bb 13)])
   )
   (BB 17
     (OPER 142 Mov [(r 82)]  [(i 0)])
@@ -373,7 +366,7 @@
     (OPER 146 Mov [(r 5)]  [(r 84)])
   )
   (BB 19
-    (OPER 156 Jmp []  [(bb 16)])
+    (OPER 156 Jmp []  [(bb 13)])
   )
   (BB 14
     (OPER 157 Mov [(r 89)]  [(i 0)])

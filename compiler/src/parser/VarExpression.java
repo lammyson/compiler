@@ -93,7 +93,6 @@ public class VarExpression extends Expression {
             oper.setDestOperand(0, reg);
             func.getCurrBlock().appendOper(oper);
             this.setRegisterNum(newRegNum);
-            func.getTable().put(identifier, newRegNum);
         } else {
             throw new CodeGenerationException("Variable does not exist");
         }

@@ -269,4 +269,812 @@ Program
           NumExpression 1
       ExpressionStatement
         AssignExpression
- 
+ Program
+  VarDecl a
+  FunDecl int addThem
+    Param d
+    Param e
+    CompoundStatement
+      VarDecl f
+      ExpressionStatement
+        AssignExpression
+          VarExpression f
+          BinaryExpression ADD_TOKEN
+            VarExpression d
+            VarExpression e
+      ReturnStatement
+        VarExpression f
+  FunDecl void putDigit
+    Param s
+    CompoundStatement
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            NumExpression 48
+            VarExpression s
+  FunDecl void printInt
+    Param r
+    CompoundStatement
+      VarDecl t
+      VarDecl found
+      ExpressionStatement
+        AssignExpression
+          VarExpression found
+          NumExpression 0
+      SelectionStatement
+        BinaryExpression GREAT_EQ_TOKEN
+          VarExpression r
+          NumExpression 10000
+        CompoundStatement
+          ExpressionStatement
+            CallExpression putchar
+              NumExpression 45
+          ExpressionStatement
+            CallExpression putDigit
+              NumExpression 1
+          ReturnStatement
+        CompoundStatement
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 1000
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 1000
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 1000
+              ExpressionStatement
+                AssignExpression
+                  VarExpression found
+                  NumExpression 1
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 100
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 100
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 100
+              ExpressionStatement
+                AssignExpression
+                  VarExpression found
+                  NumExpression 1
+            SelectionStatement
+              BinaryExpression EQUAL_TOKEN
+                VarExpression found
+                NumExpression 1
+              CompoundStatement
+                ExpressionStatement
+                  CallExpression putDigit
+                    NumExpression 0
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 10
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 10
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 10
+            SelectionStatement
+              BinaryExpression EQUAL_TOKEN
+                VarExpression found
+                NumExpression 1
+              CompoundStatement
+                ExpressionStatement
+                  CallExpression putDigit
+                    NumExpression 0
+          ExpressionStatement
+            CallExpression putDigit
+              VarExpression r
+  FunDecl int main
+    CompoundStatement
+      VarDecl b
+      VarDecl c
+      VarDecl g
+      VarDecl h
+      VarDecl i
+      ExpressionStatement
+        AssignExpression
+          VarExpression b
+          AssignExpression
+            VarExpression c
+            NumExpression 5
+      SelectionStatement
+        BinaryExpression EQUAL_TOKEN
+          VarExpression b
+          NumExpression 5
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression a
+              NumExpression 3
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression a
+              NumExpression 4
+      ExpressionStatement
+        AssignExpression
+          VarExpression g
+          NumExpression 0
+      ExpressionStatement
+        AssignExpression
+          VarExpression i
+          NumExpression 1
+      IterationStatement
+        BinaryExpression LESS_EQ_TOKEN
+          VarExpression i
+          NumExpression 8
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression g
+              BinaryExpression ADD_TOKEN
+                VarExpression g
+                VarExpression i
+          ExpressionStatement
+            AssignExpression
+              VarExpression i
+              BinaryExpression ADD_TOKEN
+                VarExpression i
+                NumExpression 1
+      ExpressionStatement
+        AssignExpression
+          VarExpression h
+          BinaryExpression DIV_TOKEN
+            VarExpression g
+            NumExpression 3
+      ExpressionStatement
+        AssignExpression
+          VarExpression g
+          BinaryExpression MUL_TOKEN
+            VarExpression h
+            NumExpression 4
+      ExpressionStatement
+        AssignExpression
+          VarExpression c
+          CallExpression addThem
+            VarExpression a
+            VarExpression b
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 56
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 61
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            VarExpression c
+            VarExpression g
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        AssignExpression
+          VarExpression i
+          NumExpression 0
+      IterationStatement
+        BinaryExpression LESS_TOKEN
+          VarExpression i
+          NumExpression 10
+        CompoundStatement
+          ExpressionStatement
+            CallExpression putchar
+              BinaryExpression ADD_TOKEN
+                NumExpression 48
+                VarExpression i
+          ExpressionStatement
+            AssignExpression
+              VarExpression i
+              BinaryExpression ADD_TOKEN
+                VarExpression i
+                NumExpression 1
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 67
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 83
+      ExpressionStatement
+        CallExpression printInt
+          NumExpression 3510
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        AssignExpression
+          VarExpression b
+          NumExpression 0
+      ExpressionStatement
+        AssignExpression
+          VarExpression c
+          NumExpression 1
+      ExpressionStatement
+        AssignExpression
+          VarExpression g
+          NumExpression 1
+      ExpressionStatement
+        AssignExpression
+ Program
+  VarDecl a
+  FunDecl int addThem
+    Param d
+    Param e
+    CompoundStatement
+      VarDecl f
+      ExpressionStatement
+        AssignExpression
+          VarExpression f
+          BinaryExpression ADD_TOKEN
+            VarExpression d
+            VarExpression e
+      ReturnStatement
+        VarExpression f
+  FunDecl void putDigit
+    Param s
+    CompoundStatement
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            NumExpression 48
+            VarExpression s
+  FunDecl void printInt
+    Param r
+    CompoundStatement
+      VarDecl t
+      VarDecl found
+      ExpressionStatement
+        AssignExpression
+          VarExpression found
+          NumExpression 0
+      SelectionStatement
+        BinaryExpression GREAT_EQ_TOKEN
+          VarExpression r
+          NumExpression 10000
+        CompoundStatement
+          ExpressionStatement
+            CallExpression putchar
+              NumExpression 45
+          ExpressionStatement
+            CallExpression putDigit
+              NumExpression 1
+          ReturnStatement
+        CompoundStatement
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 1000
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 1000
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 1000
+              ExpressionStatement
+                AssignExpression
+                  VarExpression found
+                  NumExpression 1
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 100
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 100
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 100
+              ExpressionStatement
+                AssignExpression
+                  VarExpression found
+                  NumExpression 1
+            SelectionStatement
+              BinaryExpression EQUAL_TOKEN
+                VarExpression found
+                NumExpression 1
+              CompoundStatement
+                ExpressionStatement
+                  CallExpression putDigit
+                    NumExpression 0
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 10
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 10
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 10
+            SelectionStatement
+              BinaryExpression EQUAL_TOKEN
+                VarExpression found
+                NumExpression 1
+              CompoundStatement
+                ExpressionStatement
+                  CallExpression putDigit
+                    NumExpression 0
+          ExpressionStatement
+            CallExpression putDigit
+              VarExpression r
+  FunDecl int main
+    CompoundStatement
+      VarDecl b
+      VarDecl c
+      VarDecl g
+      VarDecl h
+      VarDecl i
+      ExpressionStatement
+        AssignExpression
+          VarExpression b
+          AssignExpression
+            VarExpression c
+            NumExpression 5
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            VarExpression b
+            NumExpression 48
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      SelectionStatement
+        BinaryExpression EQUAL_TOKEN
+          VarExpression b
+          NumExpression 5
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression a
+              NumExpression 3
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression a
+              NumExpression 4
+      ExpressionStatement
+        AssignExpression
+          VarExpression g
+          NumExpression 0
+      ExpressionStatement
+        AssignExpression
+          VarExpression i
+          NumExpression 1
+      IterationStatement
+        BinaryExpression LESS_EQ_TOKEN
+          VarExpression i
+          NumExpression 8
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression g
+              BinaryExpression ADD_TOKEN
+                VarExpression g
+                VarExpression i
+          ExpressionStatement
+            AssignExpression
+              VarExpression i
+              BinaryExpression ADD_TOKEN
+                VarExpression i
+                NumExpression 1
+      ExpressionStatement
+        AssignExpression
+          VarExpression h
+          BinaryExpression DIV_TOKEN
+            VarExpression g
+            NumExpression 3
+      ExpressionStatement
+        AssignExpression
+          VarExpression g
+          BinaryExpression MUL_TOKEN
+            VarExpression h
+            NumExpression 4
+      ExpressionStatement
+        AssignExpression
+          VarExpression c
+          CallExpression addThem
+            VarExpression a
+            VarExpression b
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 56
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 61
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            VarExpression c
+            VarExpression g
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        AssignExpression
+          VarExpression i
+          NumExpression 0
+      IterationStatement
+        BinaryExpression LESS_TOKEN
+          VarExpression i
+          NumExpression 10
+        CompoundStatement
+          ExpressionStatement
+            CallExpression putchar
+              BinaryExpression ADD_TOKEN
+                NumExpression 48
+                VarExpression i
+          ExpressionStatement
+            AssignExpression
+              VarExpression i
+              BinaryExpression ADD_TOKEN
+                VarExpression i
+                NumExpression 1
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 67
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 83
+      ExpressionStatement
+        CallExpressProgram
+  VarDecl a
+  FunDecl int addThem
+    Param d
+    Param e
+    CompoundStatement
+      VarDecl f
+      ExpressionStatement
+        AssignExpression
+          VarExpression f
+          BinaryExpression ADD_TOKEN
+            VarExpression d
+            VarExpression e
+      ReturnStatement
+        VarExpression f
+  FunDecl void putDigit
+    Param s
+    CompoundStatement
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            NumExpression 48
+            VarExpression s
+  FunDecl void printInt
+    Param r
+    CompoundStatement
+      VarDecl t
+      VarDecl found
+      ExpressionStatement
+        AssignExpression
+          VarExpression found
+          NumExpression 0
+      SelectionStatement
+        BinaryExpression GREAT_EQ_TOKEN
+          VarExpression r
+          NumExpression 10000
+        CompoundStatement
+          ExpressionStatement
+            CallExpression putchar
+              NumExpression 45
+          ExpressionStatement
+            CallExpression putDigit
+              NumExpression 1
+          ReturnStatement
+        CompoundStatement
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 1000
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 1000
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 1000
+              ExpressionStatement
+                AssignExpression
+                  VarExpression found
+                  NumExpression 1
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 100
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 100
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 100
+              ExpressionStatement
+                AssignExpression
+                  VarExpression found
+                  NumExpression 1
+            SelectionStatement
+              BinaryExpression EQUAL_TOKEN
+                VarExpression found
+                NumExpression 1
+              CompoundStatement
+                ExpressionStatement
+                  CallExpression putDigit
+                    NumExpression 0
+          SelectionStatement
+            BinaryExpression GREAT_EQ_TOKEN
+              VarExpression r
+              NumExpression 10
+            CompoundStatement
+              ExpressionStatement
+                AssignExpression
+                  VarExpression t
+                  BinaryExpression DIV_TOKEN
+                    VarExpression r
+                    NumExpression 10
+              ExpressionStatement
+                CallExpression putDigit
+                  VarExpression t
+              ExpressionStatement
+                AssignExpression
+                  VarExpression r
+                  BinaryExpression SUB_TOKEN
+                    VarExpression r
+                    BinaryExpression MUL_TOKEN
+                      VarExpression t
+                      NumExpression 10
+            SelectionStatement
+              BinaryExpression EQUAL_TOKEN
+                VarExpression found
+                NumExpression 1
+              CompoundStatement
+                ExpressionStatement
+                  CallExpression putDigit
+                    NumExpression 0
+          ExpressionStatement
+            CallExpression putDigit
+              VarExpression r
+  FunDecl int main
+    CompoundStatement
+      VarDecl b
+      VarDecl c
+      VarDecl g
+      VarDecl h
+      VarDecl i
+      ExpressionStatement
+        AssignExpression
+          VarExpression b
+          AssignExpression
+            VarExpression c
+            NumExpression 5
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            VarExpression b
+            NumExpression 48
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            VarExpression c
+            NumExpression 48
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      SelectionStatement
+        BinaryExpression EQUAL_TOKEN
+          VarExpression b
+          NumExpression 5
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression a
+              NumExpression 3
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression a
+              NumExpression 4
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            VarExpression a
+            NumExpression 48
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        AssignExpression
+          VarExpression g
+          NumExpression 0
+      ExpressionStatement
+        AssignExpression
+          VarExpression i
+          NumExpression 1
+      IterationStatement
+        BinaryExpression LESS_EQ_TOKEN
+          VarExpression i
+          NumExpression 8
+        CompoundStatement
+          ExpressionStatement
+            AssignExpression
+              VarExpression g
+              BinaryExpression ADD_TOKEN
+                VarExpression g
+                VarExpression i
+          ExpressionStatement
+            AssignExpression
+              VarExpression i
+              BinaryExpression ADD_TOKEN
+                VarExpression i
+                NumExpression 1
+      ExpressionStatement
+        AssignExpression
+          VarExpression h
+          BinaryExpression DIV_TOKEN
+            VarExpression g
+            NumExpression 3
+      ExpressionStatement
+        AssignExpression
+          VarExpression g
+          BinaryExpression MUL_TOKEN
+            VarExpression h
+            NumExpression 4
+      ExpressionStatement
+        AssignExpression
+          VarExpression c
+          CallExpression addThem
+            VarExpression a
+            VarExpression b
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 56
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 61
+      ExpressionStatement
+        CallExpression putchar
+          BinaryExpression ADD_TOKEN
+            VarExpression c
+            VarExpression g
+      ExpressionStatement
+        CallExpression putchar
+          NumExpression 10
+      ExpressionStatement
+        AssignExpression
+          VarExpression i
+          NumExpression 0
+      IterationStatement
+        BinaryExpression LESS_TOKEN
+          VarExpression i
+          NumExpression 10
+        CompoundStatement
+          ExpressionStatement
+            CallExpression putchar
+              BinaryExpression ADD_TOKEN
+                NumExpression 48
+                VarExpression i
+          ExpressionStatement
+            AssignExpression
+              VarExpression i
+              BinaryExpression ADD_TOKEN
+                VarExpression i
+                NumExpression 1
+      ExpressionStatement
+        CallExpression putchar
+          NumExpressio

@@ -88,7 +88,7 @@ public class CallExpression extends Expression {
             param.genLLCode(func);
             parseParams(func, ++paramNum);
             Operation oper = new Operation(Operation.OperationType.PASS, func.getCurrBlock());
-            oper.addAttribute(new Attribute("PARAM_NUM", Integer.toString(paramNum + 1)));
+            oper.addAttribute(new Attribute("PARAM_NUM", Integer.toString(paramNum)));
             Operand src = new Operand(Operand.OperandType.REGISTER, param.getRegisterNum());
             oper.setSrcOperand(0, src);
             func.getCurrBlock().appendOper(oper);

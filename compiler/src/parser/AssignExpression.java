@@ -56,8 +56,6 @@ public class AssignExpression extends Expression {
     
     @Override
     public void genLLCode(Function func) {
-        // Simply checks if var is contained in symbol table
-        var.genLLCode(func);
         expression.genLLCode(func);
         Integer varRegNum;
         boolean isGlobal = false;
@@ -72,12 +70,6 @@ public class AssignExpression extends Expression {
         }
         this.setRegisterNum(varRegNum);
         Integer exprRegNum = expression.getRegisterNum();
-        Operation assignOper = new Operation(Operation.OperationType.ASSIGN, func.getCurrBlock());
-        Operand lhs = new Operand(Operand.OperandType.REGISTER, varRegNum);
-        assignOper.setDestOperand(0, lhs);
-        Operand rhs = new Operand(Operand.OperandType.REGISTER, exprRegNum);
-        assignOper.setSrcOperand(0, rhs);
-        func.getCurrBlock().appendOper(assignOper);
         if (isGlobal) {
             Operation storeOper = new Operation(Operation.OperationType.STORE_I, func.getCurrBlock());
             Operand storeReg = new Operand(Operand.OperandType.REGISTER, exprRegNum);
@@ -87,7 +79,13 @@ public class AssignExpression extends Expression {
             Operand offset = new Operand(Operand.OperandType.INTEGER, 0);
             storeOper.setSrcOperand(2, offset);
             func.getCurrBlock().appendOper(storeOper);
+        } else {
+            Operation assignOper = new Operation(Operation.OperationType.ASSIGN, func.getCurrBlock());
+            Operand lhs = new Operand(Operand.OperandType.REGISTER, varRegNum);
+            assignOper.setDestOperand(0, lhs);
+            Operand rhs = new Operand(Operand.OperandType.REGISTER, exprRegNum);
+            assignOper.setSrcOperand(0, rhs);
+            func.getCurrBlock().appendOper(assignOper);
         }
-        
     }
 }

@@ -64,6 +64,11 @@ int main (void) {
   int i;
 
   b = c = 5;
+	
+	putchar(b+48);
+	putchar(10);
+	putchar(c+48);
+	putchar(10);
 
   if (b == 5) {
     a = 3;
@@ -71,7 +76,8 @@ int main (void) {
   else {
     a = 4;
   }
-
+	putchar(a+48);
+	putchar(10);
   g = 0;
   i = 1;
   while (i <= 8) {
