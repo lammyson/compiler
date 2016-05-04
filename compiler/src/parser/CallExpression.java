@@ -86,9 +86,10 @@ public class CallExpression extends Expression {
         if (argList.size() > paramNum) {
             Expression param = argList.get(paramNum);
             param.genLLCode(func);
+            int currentParamNum = paramNum;
             parseParams(func, ++paramNum);
             Operation oper = new Operation(Operation.OperationType.PASS, func.getCurrBlock());
-            oper.addAttribute(new Attribute("PARAM_NUM", Integer.toString(paramNum)));
+            oper.addAttribute(new Attribute("PARAM_NUM", Integer.toString(currentParamNum)));
             Operand src = new Operand(Operand.OperandType.REGISTER, param.getRegisterNum());
             oper.setSrcOperand(0, src);
             func.getCurrBlock().appendOper(oper);
